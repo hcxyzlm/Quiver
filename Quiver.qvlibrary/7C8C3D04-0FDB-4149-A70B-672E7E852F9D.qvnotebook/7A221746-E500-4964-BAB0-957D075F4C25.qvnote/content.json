@@ -1,0 +1,27 @@
+{
+  "title": "ios常用框架和第三方库",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "# ios常用框架和第三方库"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "iOS 常用基础框架\n\n框架名称\n\n功能\n\nFoundation\n\n提供OC的基础类（像NSObject）、基本数据类型等\n\nUIKit\n\n创建和管理应用程序的用户界面\n\nQuartzCore\n\n提供动画特效以及通过硬件进行渲染的能力\n\nCoreGraphics\n\n提供2D绘制的基于C的API\n\nSystemConfiguration\n\n检测当前网络是否可用和硬件设备状态\n\nAVFoundation\n\n提供音频录制和回放的底层API，同时也负责管理音频硬件\n\nCFNetwork\n\n访问和配置网络，像HTTP、FTP和Bonjour Services\n\nCoreFoundation\n\n提供抽象的常用数据类型，如Unicode strings、XML、URL等\n\nCoreLocation\n\n使用GPS和WIFI获取位置信息\n\n\n\n\n\nGameKit\n\n为游戏提供网络功能：点对点互联和游戏中的语音交流\n\nAddressBook\n\n提供访问用户联系人信息的功能\n\nAddressBookUI\n\n提供一个用户界面，用于显示存储在地址簿中的联系人信息\n\nAudioToolBox\n\n提供音频录制和回放的底层API，同时也负责管理音频硬件\n\nAudioUnit\n\n提供一个接口，让我们的应用程序可以对音频进行处理\n\nMapKit\n\n为应用程序提供内嵌地图的接口\n\nMediaPlayer\n\n提供播放视频和音频的功能\n\nMessageUI\n\n提供视图控制接口用以处理E-mail和短信\n\nOpenGLES\n\n提供动画特效以及通过硬件进行渲染的能力\n\nStoreKit\n\n为应用程序提供在程序运行中消费的支持"
+    },
+    {
+      "type": "markdown",
+      "data": "\n## 常用第三方库"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "Alamofire ： 网络请求\nSDWebImage 图片加载库\nMJRefresh 图片加载库\nMBProgressHUD 提示hud\nsnapkit ： 自动布局\nobjectmapper ： 对象布局， json 转model\nsharesdk ： 分享，微信qq\ncoredata: 所有tab主页做了本地存储\nAsyncDisplayKit  -- 界面绘制框架\nACReuseQueue: 保持和重用对象的队列\nAFDownloadRequestOperation:多任务下载\nAFgzipRequestSerializer: zip格式解析器\nAFNetworking: 网络相关\nExpecta： 单元测试\nFMDB： 数据库\nGodzippa: 解压缩\nJZNavigationExtension: 导航栏的扩展\nlibextobjc： 扩展Objective-C 编程语言的模块化的 Cocoa 库\nLxDBAnything： log的工具\nMasonry：自动布局\nMLCompatibleAlert：弹出视图\nNJKWebViewProgress:web页面进度条\nOCMock:单元测试\nProtocolBuffers: 数据的描述格式\nReachability: 检查网络的库\nReactiveCocoa：RAC,函数式编程\nSDVersion：获取ios的设备信息，比如型号\nSDWebImage: 网络图片\nSlash：暂时还不懂\nSVProgressHUD: 进度条\nTHWrapView：pop弹出的view\nTTTAttributedLabel： 对uilab的扩展，可以嵌入链接的文件\nYTKKeyValueStore: key-value 的存储工具\nYTKNetwork：网络请求URL或参数的重写\nYYCache： 缓存\nMLeaksFinder： 检查内存泄漏工具"
+    },
+    {
+      "type": "markdown",
+      "data": "\n"
+    }
+  ]
+}

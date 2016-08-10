@@ -1,0 +1,126 @@
+{
+  "title": " UITableView",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "# UITableView\n\n## 简介:\n- UItableView是ios最常用的控件，可以显示多行表格\n- 可以分组(section)，分行(row)。\n\n## uitableview的创建方式\n- storyboard方式创建\n- 代码创建\n\n## 常用的设置\n- tableview的设置"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "//分割线颜色\nseparatorColor\n隐藏分割线\nself.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;\n// 取消选中的样式\n//    cell.selectionStyle = UITableViewCellSelectionStyleNone;\n// 设置选中的背景色\n    UIView *selectedBackgroundView = [[UIView alloc] init];\n    selectedBackgroundView.backgroundColor = [UIColor redColor];\n    cell.selectedBackgroundView = selectedBackgroundView;\n\n    // 设置默认的背景色 1\n    //cell.backgroundColor = [UIColor blueColor];\n\n    // 设置默认的背景色 2\n    UIView *backgroundView = [[UIView alloc] init];\n    //backgroundView.backgroundColor = [UIColor greenColor];\n    cell.backgroundView = backgroundView;\n\n    // 设置指示器\n     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;"
+    },
+    {
+      "type": "markdown",
+      "data": "## 可重用机制\n- 可以从回收池中返回可以利用的tableCell，如果找到则直接用，没有找到则创建\n- tableview只要创建出占满屏幕的tablecell num +1,就重用了\n- 第一种方法:创建tablecell使用标示"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "static NSString *ID = @\"tableCell\";\nUITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:cellIdentifier];\n        if (!cell) {\n            cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];\n        }\n}"
+    },
+    {
+      "type": "markdown",
+      "data": "- 第二种:创建tableview时标示"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "// 创建tableview时设置\n[tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:ID];\n// 直接获取不需要创建\nUITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID forIndexPath:indexPath];"
+    },
+    {
+      "type": "markdown",
+      "data": "- 第三种: xib重用"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "// 方式二(xib)：\n        BQxxCell *cell = [tableView dequeueReusableCellWithIdentifier:kxx];\n        if (nil == cell) {\n            cell = [[[NSBundle mainBundle]loadNibNamed:@\"BQFreightTableViewCell\" owner:self options:nil]lastObject];\n            cell.selectionStyle=UITableViewCellSelectionStyleNone;\n            [tableView registerNib:[UINib nibWithNibName:@\"BQxxCell\" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:kxx];           }"
+    },
+    {
+      "type": "markdown",
+      "data": "- 第四种"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "1.XXTableViewCell *cell;\n    cell = [tableView dequeueReusableCellWithIdentifier:@\"kxx\"];\n    if (nil == cell) {\n        cell= [[[NSBundle mainBundle] loadNibNamed:@\"XXTableViewCell\" owner:nil options:nil] lastObject];\n    }\n    return cell;\n  2.在xib中identifier属性必须写上kxx ,对应代码中的。"
+    },
+    {
+      "type": "markdown",
+      "data": "## 常用的代理方法\n- 必须实现的代理方法"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "//cell的配置\n-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath\n// 返回section的多少行cell\n-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section"
+    },
+    {
+      "type": "markdown",
+      "data": "\n- 可选的代理"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": " //多少个section\n-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section\n// 一般用于通讯录右边的a到z的字母排序\n-(NSArray<NSString *> *)sectionIndexTitlesForTableView:(UITableView *)tableView"
+    },
+    {
+      "type": "markdown",
+      "data": "## xib自定义cell\n- 1. 创建一个tableviewcell的子类，比如:zlmTableViewCell\n- 2. 创建一个xib文件(文件名跟cell的类名是一样)，比如:zlmTableViewCell\n    - 拖拽一个UITableViewCell出来\n    - 修改cell的class为zlmTableViewCell\n    - 设置cell的重用标示\n    - 往cell中添加需要用到的子控件\n- 3.在控制器中\n    - 利用registerNib...方法注册xib文件\n    - 利用重用标示找到cell(如果没有注册xib文件，就需要手动去加载xib文件)\n- 4. 在UITableViewCell中\n    - 1.将xib中的控件连接到类扩展中\n    - 需要提供一个模型属性，重写模型的set方法，在这个方法中设置数据到子控件中\n    - 2. 也可以将创建获得cell的代码封装起来(比如cellWithTableView:方法）\n\n\n## 自定义cell\n- 等高自定义cell\n- 非等高自定义cell\n    - xib自定义(重点)\n        - 在模型增加cellheight属性，用来存放cell height\n        - 在cell的set方法中强制[self layoutIfNeeded];更新布局，然后计算出高度\n        - 在控制器中tableview estimatedHeightForRowAtIndexPath返回一个估算的高度\n        - 在控制器tableView heightForRowAtIndexPath中返回真是的高度(模型的cellHeight)\n    - storyboard自定义\n    - 代码自定义(frame, autolayout)\n\n## 注意\n- 1. 通过registerNib的方式重用tableviewCell会导致开始得不到cell的高度"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "data": "// 注册\n[self.tableView registerNib:[UINib nibWithNibName:@\"XMGStatusCell\" bundle:nil] forCellReuseIdentifier:@\"status\"];\n// cell的创建\n XMGStatusCell *cell = (XMGStatusCell *)[tableView dequeueReusableCellWithIdentifier:@\"status\" forIndexPath:indexPath];\n    // 强制布局\n[cell layoutIfNeeded];"
+    },
+    {
+      "type": "markdown",
+      "data": "- 这里的cell的高度是为0\n\n## tableView的编辑\n- 1. 左滑出现删除功能"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "/*只要实现这个方法，左划cell出现删除按钮的功能就有了\n*用户提交了添加（点击了添加按钮）\\删除（点击了删除按钮）操作时会调用\n*/\n-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath"
+    },
+    {
+      "type": "markdown",
+      "data": "- 2. tableview进入编辑界面"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "[self.tableView setEditing:!self.tableView.editing animated:YES];\n// 调用这个方法就会调用\n- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {\n    // 返回编辑模型是删除还是添加\n    if (indexPath.row %2) {\n        return UITableViewCellEditingStyleInsert;\n    }\n    else {\n        return UITableViewCellEditingStyleDelete;\n    }\n}\n// 这个方法返回时那个row是删除图标或者是添加图标"
+    },
+    {
+      "type": "markdown",
+      "data": "- 点击添加删除处理(先删除模型数据，再从tableview删除)"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {\n    NSLog(@\"editting\");\n    if (editingStyle == UITableViewCellEditingStyleDelete) {\n// 删除,删除模型，在从tableview的\n[self.deals removeObjectAtIndex:indexPath.row];\nNSLog(@\"删除后的deals = %zd\",self.deals.count);\n[self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];\n    }else {\n// 添加\nNSLog(@\"+++++ %zd\", indexPath.row);\n    }\n}"
+    },
+    {
+      "type": "markdown",
+      "data": "- 添加方法"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "-(IBAction)add {\n// tableView里面需要显示新的cell数据，只需要操作模型数据\n// 操作模型\n// 刷新数据\n//[self.tableView reloadData];\n// 插入某些特定的行\n[self.tableView insertRowsAtIndexPaths:@[\n                                                 [NSIndexPath indexPathForRow:0 inSection:0],\n                                                 [NSIndexPath indexPathForRow:1 inSection:0]\n                                                 ] withRowAnimation:UITableViewRowAnimationLeft];\n}"
+    },
+    {
+      "type": "markdown",
+      "data": "\n## tableview编辑界面多选删除"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "self.tableView.allowsMultipleSelectionDuringEditing = YES; // 允许在编辑模型下选择多行\n在删除响应的处理\n- (IBAction)remove:(id)sender {\n// 取出选择的indexpath\n    NSArray *selectPath =  [self.tableView indexPathsForSelectedRows];\n    NSMutableArray *deleteDeals = [NSMutableArray array];\n    for (NSIndexPath *indexpath in selectPath) {\n        [deleteDeals addObject:self.deals[indexpath.row]];\n    }\n\n    // 删除模型\n    [self.tableView setEditing:NO animated:YES];\n\n    [self.deals removeObjectsInArray:deleteDeals];\n    [self.tableView reloadData];\n}"
+    },
+    {
+      "type": "markdown",
+      "data": ""
+    }
+  ]
+}

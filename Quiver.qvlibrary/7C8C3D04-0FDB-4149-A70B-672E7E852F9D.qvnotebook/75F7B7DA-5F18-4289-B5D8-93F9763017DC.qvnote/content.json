@@ -1,0 +1,22 @@
+{
+  "title": "NSOperation",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "# NSOperation\n\n ### 作用\n - 配合NSOperation和NSOperationQueue实现多线程\n\n\n## NSOperation\n- NSOperation是个抽象类，并不具备封装操作的能力，必须使用它的子类\n- 使用NSOperation子类的方式有3种\n    - NSInvocationOperation\n    - NSBlockOperation\n    - 继承NSOperation的子类\n- NSInvocationOperation\n- 创建:\n- -(id)initWithTarget:(id)target selector:(SEL)sel object:(id)arg;\n- 执行:\n- -(void)start;\n- 注意:默认情况下，start方法后并不会开辟新的一条线程去执行，而是在当前线程下，只有加入NSOperationQueue才会执行多线程"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "NSInvocationOperation *invocationOperation = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(run) object:nil];\n// 增加到一个队列中去\n     NSOperationQueue *queue = [[NSOperationQueue alloc ] init];\n    [queue addOperation:invocationOperation];"
+    },
+    {
+      "type": "markdown",
+      "data": "\n- NSBlockOperation\n- 创建方法\n- +(instancetype)blockOperationWithBlock:(void (^)(void))block\n- 添加操作，默认在同一个线程中执行\n- addExecutionBlock"
+    },
+    {
+      "type": "markdown",
+      "data": ""
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "title": "导航栏",
+  "cells": [
+    {
+      "type": "text",
+      "data": "存在的问题"
+    },
+    {
+      "type": "text",
+      "data": "1. 由于用系统自带的导航栏，他会主动适配系统的左右间距的位置，与我们UI明确标明间距的需求，相违背，导致每次做一个UI都要频繁调整导航栏的 间距"
+    },
+    {
+      "type": "text",
+      "data": "2. 听书和阅读的导航栏实现不一样，听书是：设置一个分类<span style=\"font-family: Menlo; font-size: 14px;\">CustomNavigationBar,里面包含：</span><span style=\"font-family: Menlo; font-size: 14px;\">UINavigationBar，</span><span style=\"font-family: Menlo; font-size: 14px;\">UINavigationItem，</span><span style=\"font-family: Menlo; font-size: 14px;\">UILabel 阅读：父类vc，添加</span><span style=\"font-family: Menlo; font-size: 14px;\">UINavigationBar，</span><span style=\"font-family: Menlo; font-size: 14px;\">UINavigationItem,</span><span style=\"font-family: Menlo; font-size: 14px;\">UIView来作为导航栏</span>"
+    },
+    {
+      "type": "text",
+      "data": "3.&nbsp;<span style=\"font-family: Menlo; font-size: 14px;\">重复代码太多，每新建一个vc，都要初始化</span><span style=\"font-family: Menlo; font-size: 14px;\">NavigationBar</span>"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "- (void)setu       pNavBar {\n    [self addCustomNavigationBar];\n    [self setVCTitle:@\"关于懒人听书\"];\n    // 添加导航栏返回按钮\n    [self setBackBarButtonItemWithTarget:self action:@selector(didBackBarButonItem:)];\n    // 添加导航栏右侧播放按钮\n    [self addRightNavigationPlayingBarItem];\n}"
+    },
+    {
+      "type": "text",
+      "data": "4.&nbsp;调整两个<span style=\"font-family: Menlo; font-size: 14px;\">UIBarButtonItem之间的间距，需要新建一个</span><span style=\"font-family: Menlo; font-size: 14px;\">UIBarButtonSystemItemFixedSpace</span>"
+    },
+    {
+      "type": "text",
+      "data": "5. 涉及的类太多，分类：UIViewController+NavigationBar，&nbsp;UIViewController+TopNaviBar，<span style=\"font-family: Menlo; font-size: 14px;\">UIViewController+LMNavigationBarItem，</span><span style=\"font-family: Menlo; font-size: 14px;\">UIViewController+CustomNavigationBar</span>"
+    },
+    {
+      "type": "text",
+      "data": "解决方案："
+    },
+    {
+      "type": "text",
+      "data": "其他app导航栏方案<div>1. 网易云音乐：不隐藏<b><span style=\"font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13.92px; font-variant-ligatures: normal; font-variant-position: normal; font-variant-numeric: normal; font-variant-alternates: normal; font-variant-east-asian: normal; line-height: 20.88px; widows: 1;\">navigationBar，用原来的</span></b><b><span style=\"font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13.92px; font-variant-ligatures: normal; font-variant-position: normal; font-variant-numeric: normal; font-variant-alternates: normal; font-variant-east-asian: normal; line-height: 20.88px; widows: 1;\">navigationBar，在上面覆盖一层自定义View，新添加的</span></b></div><div>UIBarButtonItem添加到覆盖的自定义view上</div><div>优点：兼容原生接口</div><div>缺点：为了跟系统的接口冲突，需要把原生接口的api重写</div><div><span style=\"font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; widows: 1;\"><br></span></div><div>2. 喜马拉雅fm:&nbsp;<span style=\"font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13.92px; font-variant-ligatures: normal; font-variant-position: normal; font-variant-numeric: normal; font-variant-alternates: normal; font-variant-east-asian: normal; line-height: 20.88px; widows: 1;\">隐藏navigationBar，自定义View代替navigationBar，直接用UIButton的添加。</span></div><div style=\"widows: 1;\"><div style=\"widows: auto;\">优点：<span style=\"font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; widows: 1;\">自定义性强，一个普通的UIView，可以在任何位置放置自己想要的任何控件，设置属性</span></div><div style=\"widows: auto;\"><span style=\"font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; widows: 1;\">缺点：</span><span style=\"font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; widows: 1;\">与子视图布局的时候需要注意起始Y值为64</span></div></div>"
+    },
+    {
+      "type": "text",
+      "data": "改进的方向:<div><div>1. 默认有返回item,默认点击pop</div><div>2. push UIViewController，自动判断有没有播放按钮</div><div>3. 支持添加UIButton和UIBarButtonItem两种view</div></div><div>4. 跟左滑返回的框架不冲突</div>"
+    },
+    {
+      "type": "text",
+      "data": ""
+    }
+  ]
+}

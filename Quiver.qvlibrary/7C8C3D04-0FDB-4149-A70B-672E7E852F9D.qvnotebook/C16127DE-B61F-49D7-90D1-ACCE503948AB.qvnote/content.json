@@ -1,0 +1,135 @@
+{
+  "title": "线程",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "# Thread\n\n## 主线程(ui线程)\n- 作用\n    - 显示/刷新UI界面\n    - 处理UI事件(比如点击事件，滚动事件)\n- 注意: 不要将耗时操作放在主线程，因为界面做太多耗时操作就会卡死等现象。\n- 耗时操作会卡住主线程，严重影响UI的流畅度，给用户一种“卡”的坏体验\n\n##ios多线程的实现方案\n- 1) pthead—> unix/ios的跨平台线程,c语言底层\n- 2) NSThread—>程序员管理，偶尔使用,oc语言\n- 3）GCD—>简单易用，基于c语言，自动管理\n- 4）NSOperation,比GCD多了一些更简单实用的功能，基于oc\n\n## pthead使用方式"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "// 线程函数\nvoid * run(void *param)\n{\n    for (NSInteger i = 0; i<50000; i++) {\n        NSLog(@\"------buttonClick---%zd--%@\", i, [NSThread currentThread]);\n    }\n    return NULL;\n}\n// 创建线程\n- (IBAction)buttonClick:(id)sender {\n    pthread_t thread;\n    pthread_create(&thread, NULL, run, NULL);\n\n    pthread_t thread2;\n    pthread_create(&thread2, NULL, run, NULL);\n}"
+    },
+    {
+      "type": "markdown",
+      "data": "\n## pthread 多线程方式\n- 方法\n    - (NSThread *)mainThread; // 获得主线程\n    - isMainThread; // 是否为主线程\n    - isMainThread; // 是否为主线程\n    - [NSThread currentThread] // 获得当前线程\n    - name   // 线程的名字\n    - start  // 启动线程\n    - sleepUntilDate:(NSDate *)date // 暂停挂起\n    - sleepForTimeInterval:(NSTimeInterval)ti // 挂起\n    - exit // 退出线程\n    - cancle: 设置线程退出状态，并不会立刻退出\n- 创建线程方式\n    -创建线程后自动启动线程\n    - [NSThread detachNewThreadSelector:@selector(run) toTarget:self withObject:nil];\n    - 隐式创建并启动线程\n    - [self performSelectorInBackground:@selector(run) withObject:nil];\n- 注意：上述2种创建线程方式的优缺点\n    - 优点：简单快捷\n    - 缺点：无法对线程进行更详细的设置\n\n## 例子"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "// pthread 线程方法\n-(void) runThead:(id) objce {\n     for (NSInteger i = 0; i<100; i++) {\n        NSLog(@\"-----%zd\", i);\n\n        if (i == 49) {\n            [NSThread exit]; // 直接退出线程\n        }\n    }\n\n}\n- (IBAction)buttonClick:(id)sender {\n    NSThread *thead = [[NSThread alloc] initWithTarget:self selector:@selector(runThead:) object:nil]; // 可以选择不传参数\n\n    [thead start];\n    //    [NSThread sleepForTimeInterval:2]; // 让线程睡眠2秒（阻塞2秒）\n//    [NSThread sleepUntilDate:[NSDate distantFuture]];\n    [NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:2]];\n}"
+    },
+    {
+      "type": "markdown",
+      "data": "## 线程的状态\n- 线程的持续运行和退出?怎么样能线程一直运行呢，答案就是加上runloop\n    - 1. 先监听线程推出的通知，以便知道线程什么时候退出\n    ```objc\n    [[NSNotificationCenter defaultCenter] addObserver: self, select: @select(ThreadExitNotice) name: NSThreadWillExitNotification object: nil]];\n    ```\n- 2)给线程创建一个runloop\n    - NSRunLoop* runLoop = NSRunLoop currentRunLoop runLoop runUntilDate: NSDate data\n\n## 线程的安全隐患解决方案\n- 1块资源可能会被多个线程共享，也就是多个线程可能会访问同一块资源\n- 容易造成数据错乱\n- 解决方案:互斥锁和NSLock\n- @synchronized(锁对象) { // 需要锁定的代码  }"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "-(void)saleTicket\n{\n\n    @synchronized(self) {\n    // 代码块\n    }\n}"
+    },
+    {
+      "type": "markdown",
+      "data": "- 注意要使用同一把锁，多把锁是无效的\n\n## 线程间通信\n- 一般线程间通信是指，子线程和主线程的通信\n- 子线层做耗时的操作或者网络请求数据，完成操作后需要通知UI线程进行界面刷新。"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "// 回到主线程\nperformSelector:(SEL)aSelector onThread:(NSThread *)thread withObject:(id)arg waitUntilDone:(BOOL)wait\n参数: 最后一个参数是否阻塞主线程等待这次线程执行主线程才能执行\n// 回到主线程，显示图片\n    [self.imageView performSelector:@selector(setImage:) onThread:[NSThread mainThread] withObject:image waitUntilDone:NO];\n[self.imageView performSelectorOnMainThread:@selector(setImage:) withObject:image waitUntilDone:NO];\n[self performSelectorOnMainThread:@selector(showImage:) withObject:image waitUntilDone:YES];"
+    },
+    {
+      "type": "markdown",
+      "data": "\n#GCD\n- GCD: Grand Central Dispatch(伟大的中枢调度器)\n- 任务和队列:\n- 任务: 执行什么操作\n- 队列: 用来存放任务\n- 将任务添加到队列中, GCD会自动将队列中的FIFO\n###gcd执行任务\n- 1. 同步方式(跟主线程同步执行)"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": " void dispatch_sync( dispatch_queue_tqueue, dispatch_block_t block);"
+    },
+    {
+      "type": "markdown",
+      "data": "- 2.异步方式(跟主线程异步执行)"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "void dispatch_async( dispatch_queue_tqueue, dispatch_block_t block);"
+    },
+    {
+      "type": "markdown",
+      "data": "###创建队列\n- 并发队列\n1. dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0); // 获取全局的并发队列\n2. dispatch_queue_create(\"com.520it.queue\", DISPATCH_QUEUE_CONCURRENT); 当前的并发队列"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "      dispatch_queue_t dispatch_get_global_queue( long identifier, unsigned long flags);\n第一个参数： 优先级，包含参数是高低优先级\n#define DISPATCH_QUEUE_PRIORITY_HIGH        2\n#define DISPATCH_QUEUE_PRIORITY_DEFAULT     0\n#define DISPATCH_QUEUE_PRIORITY_LOW         (-2)\n#define DISPATCH_QUEUE_PRIORITY_BACKGROUND  INT16_MIN"
+    },
+    {
+      "type": "markdown",
+      "data": "- 2.串行队列\n1. dispatch_get_main_queue 主队列\n2. dispatch_queue_create(const char *label, dispatch_queue_attr_t attr);attr为DISPATCH_QUEUE_SERIAL或者NULL,"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "dispatch_queue_t dispatch_queue_create( const char *label dispatch_queue_attr_t attr);\n第一个参数:唯一标示,可以为null\n第二个参数:DISPATCH_QUEUE_SERIAL (or NULL) 串行\nDISPATCH_QUEUE_CONCURRENT 当前队列\n-(void) loadDownImage\n{\n    // 创建队列\n    dispatch_queue_t queue =  dispatch_queue_create(\"download\", DISPATCH_QUEUE_SERIAL);\n    // 同步任务, 跟主线程同步\n    dispatch_sync(queue, ^{\n        NSLog(@\"current thread %@\", [NSThread currentThread]);\n        NSURL* url = [NSURL URLWithString:@\"http://tupian.enterdesk.com/2013/mxy/12/10/15/3.jpg\"];\n        NSData* data = [NSData dataWithContentsOfURL:url];\n        UIImage* img = [UIImage imageWithData:data];\n        [self.m_imageview performSelector:@selector(setImage:) onThread:[NSThread currentThread] withObject:img waitUntilDone:YES];\n    });\n}"
+    },
+    {
+      "type": "markdown",
+      "data": "### 任务和队列的组合情况\n- 同步+ 串行队列—>在主线程执行，任务依次执行,不能并发\n- 同步+ 并发行队列—> 在主线程执行，不会开启新的线程\n- 异步+ 并发队列—> 多条线程并发执行\n- 异步+ 串行队列—>会开启新的线程，队列中的任务依次执行，不能并发\n- 异步+ dispatch_get_main_queue主队列，只在主线程执行任\n- 注意:如果是同步+dispatch_get_main_queue队列会产生卡死现象，因为同步函数是一个需要等待主线程的串行任务执行完才能执行，而串行任务也需要一个个执行，也要等待多个串行任务执行完才能执行两个一起等，造成卡死现象。\n- demo, 会造成卡死"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "-(void)viewDidLoad {\n    [super viewDidLoad];\n    dispatch_sync(dispatch_get_main_queue(), ^{\n        NSLog(@\"current pthread %@\", [NSThread currentThread]);\n    });\n    NSLog(@\"%s end\", __func__);\n}"
+    },
+    {
+      "type": "markdown",
+      "data": "\n##gcd的基本使用\n- 单例模式\n- void dispatch_once( dispatch_once_t*predicate, dispatch_block_t block);\n- 保证在程序执行中会执行一次,一般需要声明一个static变量\n这里默认的线程安全的"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "// 单例核心代码\n+(instancetype)allocWithZone:(struct _NSZone *)zone\n{\n    NSLog(@\"allocWithZone\");\n    static dispatch_once_t onceToken;\n    dispatch_once(&onceToken, ^{\n        if (_instace == nil)\n        {\n            _instace = [super allocWithZone:zone];\n        }\n    });\n\n    return _instace;\n}"
+    },
+    {
+      "type": "markdown",
+      "data": "\n## gcd进程间通信\n- 例子:"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "d   ispatch_queue_t queue =  dispatch_queue_create(\"download\", DISPATCH_QUEUE_CONCURRENT);\n    // 异步步务, 跟主线程异步执行\n    dispatch_async(queue, ^{\n\n        NSLog(@\"dispatch_async\");\n        NSLog(@\"current thread %@\", [NSThread currentThread]);\n        NSURL* url = [NSURL URLWithString:@\"http://tupian.enterdesk.com/2013/mxy/12/10/15/3.jpg\"];\n        NSData* data = [NSData dataWithContentsOfURL:url];\n        UIImage* img = [UIImage imageWithData:data];\n\n        // 回到主线程, dispatch_sync也可以\n        dispatch_async(dispatch_get_main_queue(), ^{\n            self.m_imageview.image = img;\n\n        });\n    });"
+    },
+    {
+      "type": "markdown",
+      "data": "\n## gcd执行任务其他函数"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "void dispatch_barrier_sync(dispatch_queue_t queue,dispatch_block_t block);\n//在前面的任务执行完他才执行，而且在他后面的任务等他执行才执行\n\n void dispatch_after( dispatch_time_twhen, dispatch_queue_t queue,dispatch_block_t block);\n// 多少时间后任务执行，同步还是异步执行取决你传入的队列\n\n + (NSTimer *)scheduledTimerWithTimeInterval:(NSTimeInterval)seconds invocation:(NSInvocation *)invocation repeats:(BOOL)repeats\n//开辟一个时钟，在多少秒后执行，主要不要在时钟做耗时操作，是在UI线程中执行\n延迟执行"
+    },
+    {
+      "type": "markdown",
+      "data": "\n### Dispatch Group\n1. 可以把多个任务并发执行，多个任务并发执行结束就会再往下执行，多个任务的执行顺序不一致。\n2. 应用场景：如果有用户希望获取图片还有用户信息后才往下执行，获取图片开辟一个线程，用户信息一个线程。"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0); // 获取全局并发队列\n// 创建group组\n    dispatch_group_t group = dispatch_group_create();\n    // 异步函数\n    dispatch_group_async(group, queue, ^{\n        NSLog(@\"block1, current thread = %@\", [NSThread currentThread]);\n    });\n    dispatch_group_async(group, queue, ^{\n        NSLog(@\"block2, current thread = %@\", [NSThread currentThread]);\n    });\n    dispatch_group_async(group, queue, ^{\n        NSLog(@\"block3  , current thread = %@\", [NSThread currentThread]);\n    });\n\n    dispatch_group_notify(group, queue, ^{\n        NSLog(@\"done, current thread = %@\", [NSThread currentThread]);\n    });\n// 结果: block1,block2,block3三个顺序不确定，done是最后输出"
+    },
+    {
+      "type": "markdown",
+      "data": "\n\n## 单例模式\n- 模板"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "+(instancetype)shareManager\n{\n    static id sharedInstance = nil;\n    static dispatch_once_t onceToken;\n    dispatch_once(&onceToken, ^{\n        sharedInstance = [[self alloc] init];\n    });\n    return sharedInstance;\n}"
+    },
+    {
+      "type": "markdown",
+      "data": "### 注意点: 单例不要使用继承，否则会出现连个子类共有一块内存的问题\n\n"
+    }
+  ]
+}

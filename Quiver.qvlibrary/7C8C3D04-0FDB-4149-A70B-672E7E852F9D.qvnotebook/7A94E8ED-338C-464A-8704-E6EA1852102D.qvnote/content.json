@@ -1,0 +1,27 @@
+{
+  "title": "autoLayout适配",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "# autoLayout适配\n- ipone3gs/ipone 4\n    - 没有屏幕适配可言\n    - 全部用frame, bounds, center进行布局\n    - 很多这样的坐标：坐标值，宽度高度值全部写死\n\n- ipad ,ipone 横屏\n    - 出现autoreszing技术\n    - 让横竖屏切换相对简单\n    -让子控件可以跟随父控件的行为发生相应的改变\n- 前提是: 关闭autoLayout功能,点击控制器选择右边工具栏第一个。\n- 局限性：只能解决父子控件之间的关系，，不能解决兄弟之间的关系\n\n## autolayout\n 1. 有pin, align约束，需要参造物。\n 2. ios6.0出现了autolayout技术，ios7开始流行\n 3. UILabel的适配:根据字符的长度换行，长度自适应\n    - 方案: 添加左，上的约束，宽度约束，设置line of number = 0，高度会自适应\n    - 如果让宽度也根据字展示的长度来适应，可以试着宽度约束为小于等于\n\n## 如何让父控件高度跟随子控件的内容进行拉伸\n- 约束子控件的top距离父控件的top的距离，bottom距离父控件buttom的距离\n- 不约束父控件的高度\n\n\n\n- 练习1\n    - 控制器view底部添加两个view,一个蓝色，一个绿色\n    - 两个view高度，宽度相等\n    - 距离父控件左边，右边，下面和两个view之间的距离相等50\n- 练习2\n    - 在控制器view顶部添加两个view,1个蓝色，1个红色\n    - 两个view高度永远相等\n    - 红色和蓝色view右边对齐\n    - 蓝色view距离父控件左边，右边上边间距相等\n    - 蓝色view距离红色view间距固定\n    -红色view的左边和父控件的中点对齐\n\n## masonry使用\n使用步骤:\n- 添加masonry文件夹所有源代码到工程中\n- 添加两个宏，导入主头文件\n- - mas_equalTo有自动包装功能，比如自动将20包装成@20, equalTo没有自动包装功能。"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "#define MAS_SHORTHAND\n// 只要添加这个宏，就不用加mas_前缀\n#deine MAS_SHORTHAND_GLOBAL\n// 添加这个宏，equalTO等价于mas_equal\n    #import \"Masonry.h\"\n// 头文件一定要放在两个宏后面"
+    },
+    {
+      "type": "markdown",
+      "data": "- 约束的类型\n - 尺寸:width/height/size\n - 位置:left/right/leading/tailing/top/bottm\n - center/centerX/centerY\n - 边界: edges/ insets/MASEdgeInsets\n- 注意: 一定要拥有父控件才能添加约束\n## 添加约束方法"
+    },
+    {
+      "type": "code",
+      "language": "text",
+      "data": "// 只会添加约束\n- (NSArray *)makeConstraints:(void(^)(MASConstraintMaker *make))block;\n// 更新约束\n- (NSArray *)updateConstraints:(void(^)(MASConstraintMaker *make))block;\n// 先删除后添加\n- (NSArray *)remakeConstraints:(void(^)(MASConstraintMaker *make))block;"
+    },
+    {
+      "type": "markdown",
+      "data": "\n## 父控件有一个view和一个uilable的两个子控件，uilabel是高度是自适应,当uilable的高度没有view大的时候使用view来撑大，否则根据uilable的高度来撑大，怎么做?\n- 设置view bottom的约束小于等于父view,设置约束优先级为高，设置uilable的bottom的约束小于等于父view，设置优先级为低！\n"
+    }
+  ]
+}

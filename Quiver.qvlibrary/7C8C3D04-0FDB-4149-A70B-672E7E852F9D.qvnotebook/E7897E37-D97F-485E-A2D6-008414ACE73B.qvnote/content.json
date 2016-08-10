@@ -1,0 +1,27 @@
+{
+  "title": "NSAttributedString的属性",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "# NSAttributedString\n- 属性"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": " 字符属性\n\n 字符属性可以应用于 attributed string 的文本中。\n\n NSString *const NSFontAttributeName;(字体)\n\n NSString *const NSParagraphStyleAttributeName;(段落)\n\n NSString *const NSForegroundColorAttributeName;(字体颜色)\n\n NSString *const NSBackgroundColorAttributeName;(字体背景色)\n\n NSString *const NSLigatureAttributeName;(连字符)\n\n NSString *const NSKernAttributeName;(字间距)\n\n NSString *const NSStrikethroughStyleAttributeName;(删除线)\n\n NSString *const NSUnderlineStyleAttributeName;(下划线)\n\n NSString *const NSStrokeColorAttributeName;(边线颜色)\n\n NSString *const NSStrokeWidthAttributeName;(边线宽度)\n\n NSString *const NSShadowAttributeName;(阴影)(横竖排版)\n\n NSString *const NSVerticalGlyphFormAttributeName;\n\n 常量\n\n 1> NSFontAttributeName(字体)\n\n 该属性所对应的值是一个 UIFont 对象。该属性用于改变一段文本的字体。如果不指定该属性，则默认为12-point Helvetica(Neue)。\n\n 2> NSParagraphStyleAttributeName(段落)\n\n 该属性所对应的值是一个 NSParagraphStyle 对象。该属性在一段文本上应用多个属性。如果不指定该属性，则默认为 NSParagraphStyle 的defaultParagraphStyle 方法返回的默认段落属性。\n\n 3> NSForegroundColorAttributeName(字体颜色)\n\n 该属性所对应的值是一个 UIColor 对象。该属性用于指定一段文本的字体颜色。如果不指定该属性，则默认为黑色。\n\n 4> NSBackgroundColorAttributeName(字体背景色)\n\n 该属性所对应的值是一个 UIColor 对象。该属性用于指定一段文本的背景颜色。如果不指定该属性，则默认无背景色。\n\n 5> NSLigatureAttributeName(连字符)\n\n 该属性所对应的值是一个 NSNumber 对象(整数)。连体字符是指某些连在一起的字符，它们采用单个的图元符号。0 表示没有连体字符。1 表示使用默认的连体字符。2表示使用所有连体符号。默认值为 1（注意，iOS 不支持值为 2）。\n\n 6> NSKernAttributeName(字间距)\n\n 该属性所对应的值是一个 NSNumber 对象(整数)。字母紧排指定了用于调整字距的像素点数。字母紧排的效果依赖于字体。值为 0 表示不使用字母紧排。默认值为0。\n\n 7> NSStrikethroughStyleAttributeName(删除线)\n\n 该属性所对应的值是一个 NSNumber 对象(整数)。该值指定是否在文字上加上删除线，该值参考“Underline Style Attributes”。默认值是NSUnderlineStyleNone。\n\n 8> NSUnderlineStyleAttributeName(下划线)\n\n 该属性所对应的值是一个 NSNumber 对象(整数)。该值指定是否在文字上加上下划线，该值参考“Underline Style Attributes”。默认值是NSUnderlineStyleNone。\n\n 9> NSStrokeColorAttributeName(边线颜色)\n\n 该属性所对应的值是一个 UIColor 对象。如果该属性不指定（默认），则等同于 NSForegroundColorAttributeName。否则，指定为删除线或下划线颜色。更多细节见“Drawing attributedstrings that are both filled and stroked”。\n\n 10> NSStrokeWidthAttributeName(边线宽度)\n\n 该属性所对应的值是一个 NSNumber 对象(小数)。该值改变描边宽度（相对于字体size 的百分比）。默认为 0，即不改变。正数只改变描边宽度。负数同时改变文字的描边和填充宽度。例如，对于常见的空心字，这个值通常为3.0。\n\n 11> NSShadowAttributeName(阴影)\n\n 该属性所对应的值是一个 NSShadow 对象。默认为 nil。\n\n 12> NSVerticalGlyphFormAttributeName(横竖排版)\n\n 该属性所对应的值是一个 NSNumber 对象(整数)。0 表示横排文本。1 表示竖排文本。在 iOS 中，总是使用横排文本，0 以外的值都未定义。"
+    },
+    {
+      "type": "markdown",
+      "data": "## 用法"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "NSMutableDictionary *normalAtt = [[NSMutableDictionary alloc] init];\n[normalAtt setValue:[UIFont systemFontOfSize:10] forKey:NSFontAttributeName];\nNSMutableAttributedString *normalAttStr = [[NSMutableAttributedString alloc] initWithString:title];\n]\n[normalAttStr addAttributes:normalAtt range:NSMakeRange(0, title.length)];\n[normalAttStr setAttributes:normalAtt];"
+    },
+    {
+      "type": "markdown",
+      "data": ""
+    }
+  ]
+}

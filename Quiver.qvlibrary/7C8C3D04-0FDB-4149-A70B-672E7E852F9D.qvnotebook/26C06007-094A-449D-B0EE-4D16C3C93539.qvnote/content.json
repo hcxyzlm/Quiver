@@ -1,0 +1,32 @@
+{
+  "title": "kvc和kvo",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "# kvc和kvo\n\n## kvc\n- kvc是属于监听者模式的，一个类主要添加到某个类的监听中。当类的属性发生变化时，这个类就会被回调。\n- 例子:"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "//name是XMGPerson的一个属性\nself.p1 = [[XMGPerson alloc] init];\nself.p1.name = @\"p1\";\n//self这个类监听XMGPerson这个类的name属性变化\n//属性变化会回调到observeValueForKeyPath这个方法\n[self.p1 addObserver:self forKeyPath:@\"name\" options: NSKeyValueObservingOptionOld context:nil];\n/**\n * 当监听到object的keyPath属性发生了改变\n */\n-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context\n{\n    NSLog(@\"监听到%@对象的%@属性发生了改变， %@\", object, keyPath, change);\n}"
+    },
+    {
+      "type": "markdown",
+      "data": "- 在dealloc方法中移除监听"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "[self.p1 removeObserver:self forKeyPath:@\"name\"];"
+    },
+    {
+      "type": "markdown",
+      "data": "\n##kvc作用\n - 可以用字典初始化模型"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "@implementation ZLMDeals\n+(instancetype)dealsWithDict:(NSDictionary *)dict {\n    ZLMDeals *deal = [[self alloc] init];\n    [deal setValuesForKeysWithDictionary:dict];\n    deal.check = NO;\n    return deal;\n}\n@end\n ```\n - 实现原理:\n    - 用字典来转模型,会遍历字典中的所有key,就会去模型中查找setName这个方法(这里假设key是name),有则调用。没有就会去模型中有没有_name这个属性，有就会_name = value\n    - 都没有找到就会报错\n\n## 注意点\n1. 字典转模型，当字典的key在模型找不到会报错，解决方法:\n2. 重写 (void)setValue:(id)value forUndefinedKey:(NSString *)key方法，过滤掉。\n\n\n"
+    }
+  ]
+}

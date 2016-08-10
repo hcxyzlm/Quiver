@@ -1,0 +1,42 @@
+{
+  "title": "统一导航栏文档",
+  "cells": [
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": "原来架构：<div>1. 分类：<span style=\"font-family: Menlo; font-size: 14px;\">CustomNavigationBar</span></div><div><span style=\"font-family: Menlo; font-size: 14px;\">&nbsp;1）包含</span><span style=\"font-family: Menlo; font-size: 14px;\">UINavigationBar</span><span style=\"font-family: Menlo; font-size: 14px;\">，</span><span style=\"font-family: Menlo; font-size: 14px;\">UINavigationItem，</span><span style=\"font-family: Menlo; font-size: 14px;\">customNavigationBarTitleView</span><br></div><div><br></div><div>缺点： (1 由于原来的也是用<span style=\"font-family: Menlo; font-size: 14px;\">UINavigationBar，自动适应的位置，导致我们项目的导航栏的位置调整比较麻烦</span></div><div><span style=\"font-family: Menlo; font-size: 14px;\">&nbsp; &nbsp; &nbsp;(2 重复代码太多，每新建一个vc，都要初始化</span><span style=\"font-family: Menlo; font-size: 14px;\">NavigationBar</span></div>"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "- (void)setupNavBar {\n    [self addCustomNavigationBar];\n    [self setVCTitle:@\"关于懒人听书\"];\n    // 添加导航栏返回按钮\n    [self setBackBarButtonItemWithTarget:self action:@selector(didBackBarButonItem:)];\n    // 添加导航栏右侧播放按钮\n    [self addRightNavigationPlayingBarItem];\n}"
+    },
+    {
+      "type": "text",
+      "data": "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 3)调整两个<span style=\"font-family: Menlo; font-size: 14px;\">UIBarButtonItem之间的间距，需要新建一个</span><span style=\"font-family: Menlo; font-size: 14px;\">UIBarButtonSystemItemFixedSpace</span><div><br></div>"
+    },
+    {
+      "type": "text",
+      "data": "<b>解决方案一：<span style=\"color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13.92px; font-variant-ligatures: normal; font-variant-position: normal; font-variant-numeric: normal; font-variant-alternates: normal; font-variant-east-asian: normal; line-height: 20.88px; widows: 1; background-color: rgb(255, 255, 255);\">隐藏navigationBar，自定义View代替navigationBar，默认初始化在父VC</span></b>"
+    },
+    {
+      "type": "text",
+      "data": "<div style=\"widows: 1;\"><font face=\"Verdana, Arial, Helvetica, sans-serif\"><span style=\"font-size: 14px;\">优点：</span></font><span style=\"font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13.92px;\">自定义性强，一个普通的UIView，可以在任何位置放置自己想要的任何控件，设置属性</span></div><div style=\"widows: 1;\"><span style=\"font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13.92px;\">缺点：</span><span style=\"font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13.92px;\">与子视图布局的时候需要注意起始Y值为64</span></div>"
+    },
+    {
+      "type": "text",
+      "data": "解决方案二：不隐藏<b><span style=\"font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13.92px; font-variant-ligatures: normal; font-variant-position: normal; font-variant-numeric: normal; font-variant-alternates: normal; font-variant-east-asian: normal; line-height: 20.88px; widows: 1;\">navigationBar，用原来的</span></b><b><span style=\"font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13.92px; font-variant-ligatures: normal; font-variant-position: normal; font-variant-numeric: normal; font-variant-alternates: normal; font-variant-east-asian: normal; line-height: 20.88px; widows: 1;\">navigationBar，在上面覆盖一层自定义View</span></b>"
+    },
+    {
+      "type": "text",
+      "data": "优点: 子视图布局的不需要设置起始y值为64,与原生的接口一致<div style=\"widows: 1;\">缺点：<font face=\"Verdana, Arial, Helvetica, sans-serif\"><span style=\"font-size: 14px;\">导航栏相关的接口得重写一套 ，需要在父类vc添加导航栏，需要用到的导航栏的vc得继承父类的vc。</span></font></div>"
+    },
+    {
+      "type": "markdown",
+      "data": "## 改进\n1. 默认有返回item,默认点击pop\n2. push UIViewController，自动判断有没有播放按钮\n3. 自定义UINavigationBar，在上面覆盖一层VIew,用来添加按钮\n4. 支持添加UIButton和UIBarButtonItem两种view\n5. 父类vc默认添加播放按钮，自动判断"
+    }
+  ]
+}

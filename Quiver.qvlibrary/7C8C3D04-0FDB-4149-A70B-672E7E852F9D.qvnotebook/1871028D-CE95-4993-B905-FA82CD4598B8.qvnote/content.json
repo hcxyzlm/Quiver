@@ -1,0 +1,9 @@
+{
+  "title": "ios软件开发步骤",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "## ios软件开发步骤\n\n- 简单分析软件\n- 开发步骤:\n    - 搭建基本的软件骨架(ui)\n    - 获得网络数据(网络请求,json)\n    - 展示数据到软件界面(model, tablecell)\n\n## ui界面组成的最基本对象 == 类\n - uiLabel, UIButton, UIImageView\n"
+    }
+  ]
+}

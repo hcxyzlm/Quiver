@@ -1,0 +1,54 @@
+{
+  "title": "touch事件处理",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "# 事件处理\n- 提示：提示：iPhone开发中，要避免使用双击事件！\n\n## 响应者对象\n- 在iOS中不是任何对象都能处理事件，只有继承了UIResponder的对象才能接收并处理事件。我们称之为“响应者对象\n- UIApplication、UIViewController、UIView都继承自UIResponder，因此它们都是响应者对象，都能够接收并处理事件\n\n## UIResponder\n- 触摸事件"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;\n-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event;\n-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event;\n-(void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event;"
+    },
+    {
+      "type": "markdown",
+      "data": "- 加速事件"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "-(void)motionBegan:(UIEventSubtype)motion withEvent:(nullable UIEvent *)event NS_AVAILABLE_IOS(3_0);\n-(void)motionEnded:(UIEventSubtype)motion withEvent:(nullable UIEvent *)event NS_AVAILABLE_IOS(3_0);\n-(void)motionCancelled:(UIEventSubtype)motion withEvent:(nullable UIEvent *)event NS_AVAILABLE_IOS(3_0);"
+    },
+    {
+      "type": "markdown",
+      "data": "- 远程控制事件"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "-(void)remoteControlReceivedWithEvent:(UIEvent *)event;"
+    },
+    {
+      "type": "markdown",
+      "data": "\n## UITouch\n- 属性：\n    - tapCount 短时间内点击屏幕的次数\n    - window 触摸所在的窗口\n    - view 触摸所在的view\n    - timestamp 触摸事件的记录或者变化时时间\n    - UITouchPhase phase  触摸事件所在的状态\n    - UITouchPhase是一个枚举类型，包含：\n    - UITouchPhaseBegan（触摸开始）\n    - UITouchPhaseMoved（接触点移动）\n    - UITouchPhaseStationary（接触点无移动）\n    - UITouchPhaseEnded（触摸结束）\n    - UITouchPhaseCancelled（触摸取消）\n- 方法：\n    -  (CGPoint)locationInView:(UIView *)view;\n        - 返回值表示触摸在view上的位置\n        - 这里返回的位置是针对view的坐标系的（以view的左上角为原点(0, 0)\n        - 调用时传入的view参数为nil的话，返回的是触摸点在UIWindow的位置\n    -  (CGPoint)previousLocationInView:(UIView *)view;\n        - 该方法记录了前一个触摸点的位置\n        -\n\n## 事件的传递\n- 如果父控件不能接收触摸事件，那么子控件就不可能接收到触摸事件(掌握)\n- 发生触摸事件后，系统会将该事件加入到一个又UIApplication管理的事件队列中。\n- UIApplication会从事件队列中取出最前面的事件，并将事件分发下去以便处理，通常，先发送事件给应用程序的主窗口（keyWindow\n- 主窗口会在视图控制层次结构中找到一个最合适的touches方法来做具体的事件处理。touchbegin, touchmoved, touchcancle。\n\n## 事件最合适的处理\n- 如何找到最合适的控件来处理事件？\n- 自己是否能接收触摸事件？\n- 触摸点是否在自己身上？\n- 从后往前遍历子控件，重复前面的两个步骤\n- 如果没有符合条件的子控件，那么就自己最适合处理\n\n## UIView不接受触摸的三种情况\n- 1. 不接受用户交互 userInteractionEnabled = NO;\n- 2. 隐藏 hidden = YES\n- 3. 透明 alpha <= 0.01\n- 提示: UIImageView的userInteractionEnabled默认就是NO,因此UIImageView及它的子控件默认是不能接收触摸事件的。\n\n##触摸事件处理的详细过程\n- 事件的传递是响应链向下传递，触摸事件的处理是顺着响应链想上传递，将事件交给上一个响应者处理。\n\n- hitTest的作用\n- 寻找最合适的view\n用于判断自己可以接受点击事件或者向上传递事件，返回nil顺着响应链想上。否则自己处理。"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "-(UIView*)hitTest:(CGPoint)point withEvent:(UIEvent *)event {\nNSLog(@\"%s\", __func__);\nUIView *hitView = [super hitTest:point withEvent:event];\nif (!self.userInteractionEnabled || self.hidden == YES || self.alpha <= 0.01) {\nreturn nil;\n}\nif (![self pointInside:point withEvent:event]) {\n    return nil;\n}\n    for (UIView *subview in self.subviews.objectEnumerator) {\n// 转化成子类的坐标系\nCGPoint subPt = [subview convertPoint:point toView:self];\nUIView *resultView = [subview hitTest:subPt withEvent:event];\nif (resultView) {\nhitView = resultView;\n        }\n    }\n\n    return hitView;\n}"
+    },
+    {
+      "type": "markdown",
+      "data": "\n## 坐标转化"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "// 当前的坐标系从self转化到subview坐标系\nCGPoint subPt = [subview convertPoint:point fromView:self];\n//CGPoint subPt1 = [self convertPoint:point toView:subview];"
+    },
+    {
+      "type": "markdown",
+      "data": ""
+    }
+  ]
+}

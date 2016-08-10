@@ -1,0 +1,63 @@
+{
+  "title": "常用的ui控件",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "## 常用的ui控件\n- UIButton 按钮\n- UILable 文本标签\n- UITextField 文本输入框\n- UIImageView 图片显示\n- UIScrollView 滚动的控件\n- UITableView 表格\n- UICollectionView 九宫格\n- UIWebView 网页展示控件\n- UIAbertView 对话框(中间弹框)\n- UINavigation 导航条\n- UITabBar     横向导航条\n\n## storyboard文件的认识\n- 用来描述软件界面\n- 默认情况下，程序一启动就会加载Main.storyboard\n- 加载storyboard时，会首先创建和显示箭头所指的控制器界面\n\n## IBAction和IBOutlet\n- IBAction：\n    - 本质就是void\n    - 能让方法具备连线的功能\n- IBOutlet\n    - 能让属性具备连线的功能\n\n## storyboard连线容易出现的问题\n- 连接的方法代码被删掉，但是连线没有去掉\n    - 可能会出现方法找不到错误\n    - unrecognized selector sent to instance\n- 连接的属性代码被删掉，但是连线没有去掉\n    - setValue:forUndefinedKey:]: this class is not key value coding-compliant for the key\n\n## UIViewController（控制器）的认识\n- 一个控制器负责管理一个大界面\n- 控制器负责界面的创建、事件处理等\n\n## 分类\n- 格式"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "@interface 类名(分类名)\n/** 方法的声明 */\n@end"
+    },
+    {
+      "type": "markdown",
+      "data": "- 作用\n    - 为某个类增加额外的方法声明和实现\n    -不能增加额外的属性\n\n## 类扩展\n- 格式"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "@interface 类名()\n/** 属性、方法的声明 */\n@end"
+    },
+    {
+      "type": "markdown",
+      "data": "- 作用\n    - 为某个类增加额外的属性和方法声明\n    - 可以写在.h和.m文件中\n\n## 项目属性\n- Product Name\n    - 软件名称、产品名称、项目名称\n- Organization Name\n    - 公司名称、组织名称\n- Organization Identifier\n    - 公司的唯一标识\n    - 一般是公司域名的反写，比如com.520it\n- Bundle Identifier\n    - 软件的唯一标识\n    - 一般是Organization Identifier + Product Name\n\n## frame的属性\n - 以父控件的左上角为原点\n - frame代表了uiview的位置和尺寸\n - 可以通过View.frame = CGRectMake()来设置\n -  NSLog(@\"%@\", NSStringFromCGRect(self.view.frame));\n    - 可以来打印出view的位置和高度\n\n## bouds\n - 以自己的左上角为坐标原点，所以bounds一般为0,0\n - bounds映射是UIView本身的坐标系统\n\n## center\n - 控件中心的位置(以父控件的左上角为坐标原点)\n - 改变center也相当于改变位置\n - center的默认是控件的中心点\n - 可以用centerXAnchor/可以用centerYAnchor设置控件的瞄点\n - 锚点的范围是(0 ~1)默认是(0.5, 0.5)；左上角是(0， 0)\n - 右下角是(1,1)\n\n\n#UIButton\n - 属性\n - [UIButton buttonWithType:UIButtonTypeCustom]创建代码等价于[[UIButton alloc] init]\n - 按钮可以展示图片和文字，设置按钮的状态\n - button的状态有\n    -  UIControlStateNormal               普通状态\n    -  UIControlStateHighlighted          按下没有松手状态\n    -  UIControlStateDisabled             不可用状态\n\n## UIView\n- 所有的显示控件都继承自UIView\n- storyboard所有的控件都有view的属性设置，还有其他一些自己的特有属性，比如:button除了有view的属性之外，还有状态的属性\n- clipsToBounds可以对自己的子控件进行裁剪，当子控件超出自己的范围时裁剪为不可见\n\n\n## 九宫格的计算方式\n- 利用控件的索引index计算出控件所在的行号和列号\n- 利用列号计算出控件的x值\n- 利用控件的行号计算出y值\n\n## HUD\n- 其他说法:指示器，遮盖，蒙板\n- 半透明HUD的做法：\n    - 背景色设置为半透明颜色\n\n## 定时器的方法\n - performSelector\n ```objc\n [self performSelector:@selector(hideHUD) withObject:nil afterDelay:1.5];\n /* 1.5秒后调用hideHUD方法，withObject是传递参数*/\n ```\n\n- GCD"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "dispatch_after(dispatch_time(DISPATCH_TIME_NOW,(int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{\n            [self hideHUD];\n});\n /* 1.5秒后调用hideHUD方方法，第一个参数是从先现在开始为基准*/\n ```\n\n- NStimer"
+    },
+    {
+      "type": "markdown",
+      "data": "[NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(hideHUD) userInfo:nil repeats:YES];\n /* repeats参数为是否重复执行*/\n ```\n## plist文件的使用\n- 不要叫info命令plist，因为项目文件信息已经有一个了info文件"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "NSString *path = [[NSBundle mainBundle] pathForResource:@\"shops\" ofType:@\"plist\"];\n/* 获取plist文件的路径*/\n/* 把文件读到数组中*/\n_shops = [NSArray arrayWithContentsOfFile:path];"
+    },
+    {
+      "type": "markdown",
+      "data": "\n## 常见问题\n- 项目里面某个.m文件无法使用\n    - 检查Build Phases -> cpmpile Source\n- 项目某个资源文件无法使用,比如:pilst文件，图片文件\n    -检查Build Phases-->copy bundle resources\n\n## 模型\n- 什么是模型？\n    - 模型就是存放数据的集合\n    - 一般模型是继承NSObject纯对象类的\n    - 模型应该提供一个传入字典的构造方法\n    - 模型前面最好加前缀\n    - 可以设置每次新建文件时都有前缀\n    - 点击项目名->右边->class prefix\n- 模板"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "+(instancetype)shopWithDict:(NSDictionary *)dict\n{\nreturn [[self alloc] initWithDict:dict];\n}\n// 类方法\n-(instancetype)initWithDict:(NSDictionary*) dic {\nif (self = [super init]) {\n [self setValuesForKeysWithDictionary:dic];\n}\nreturn self;\n}\n// 对象方法"
+    },
+    {
+      "type": "markdown",
+      "data": "\n## 懒加载\n- 使用到才创建并加载数据，没有用到不占用内存\n- 格式:"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "-(NSArray*)shops{\nif (!_shops) {\nNSString *path = [[NSBundle mainBundle] pathForResource:@\"shops\" ofType:@\"plist\"];\nNSArray* dictArrays = [NSArray arrayWithContentsOfFile:path];\nNSMutableArray *shopArray = [NSMutableArray array];\nfor (NSDictionary *dict in dictArrays) {\nshop *shopInfo = [shop shopWithDict:dict];\n[shopArray addObject:shopInfo];\n}\n_shops = shopArray\n}\nreturn _shops;\n}"
+    },
+    {
+      "type": "markdown",
+      "data": "\n## 一个控件看不到有哪些可能\n- 高度和宽度为0\n- 位置超出范围\n- hidden = YES\n- alpha <= 0.01\n- 没有设置背景色，没有设置内容\n- 背景和内容颜色是一样的\n\n## view的封装\n- 如果一个view内存的子控件比较多，一般会考虑自定义一个view,把它内部控件的创建隐蔽起来，不让外界关心\n- 外界可以传入对应的模型给view,view拿到模型数据给内部的子控件设置对应的数据\n- 重写initframe给创建子控件\n- 重写layoutSbuViews来设置子控件的位置\n\n\n## xib文件加载方式\n // NSBoudle添加\n ```objc\n NSArray *viewArrays = [[NSBundle mainBundle] loadNibNamed:@\"testXib\" owner:nil options:nil];\n    [self.view addSubview:viewArrays[1]];\n ```\n - UINib方式添加\n  ```objc\nUINib *nib = [UINib nibWithNibName:@\"testXib\" bundle:[NSBundle mainBundle]];\nviewArrays = [nib instantiateWithOwner:nil options:nil];\nUIView *view = viewArrays[0];\nCGRect frame = CGRectMake(100, 200, view.frame.size.width, view.frame.size.height);\nview.frame = frame;\n[self.view addSubview:view];\n ```\n - 加载xib的时候会调用一次awakeFromNib的方法\n - initWithFrame 和awakeFromNib何时会调用？\n - initWithFrame用纯代码创建会调用\n - 用xb, ib创建控件时会调用initWithCoder，然后再调用awakeFromNib\n- initWithCoder是解析xib文件\n"
+    }
+  ]
+}

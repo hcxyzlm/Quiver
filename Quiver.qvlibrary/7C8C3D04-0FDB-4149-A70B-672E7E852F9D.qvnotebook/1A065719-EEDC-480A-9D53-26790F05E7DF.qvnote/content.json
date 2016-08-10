@@ -1,0 +1,27 @@
+{
+  "title": "UIViewController",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "# UIViewController\n\n## 跳转导航器隐藏uitabber的属性\n- hidesBottomBarWhenPushed\n\n## 控制器的创建\n- stroyboard:在ib控制器中选择使用那个类作为自定义controller\n代码方式:"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": " UIStoryboard *board = [UIStoryboard storyboardWithName:@\"Main\" bundle:nil];\n    UIViewController *vc = [board instantiateInitialViewController];\n// 加载箭头指向的控制器\n另一种方式:设置stordboardID\nUIViewController *vc = [board instantiateViewControllerWithIdentifier:@\"viewControllerID\"];"
+    },
+    {
+      "type": "markdown",
+      "data": "- xib加载:控制器 *vc = [[控制器 alloc] initWithNibName:@\"ViewController\" bundle:nil];\n\n##控制器view的创建注意点\n- 重写控制器的loadview方法，不会去加载storyboard的界面\n- loadview方法的作用:\n    - 一旦重写了这个方法，就不要调用[super loadView]\n    - 一般用来创建自定义的view\n    - loadview什么时候调用: 当控制器的view没有创建的时候，就会调用loadview去创建控制器的view\n    - 如果重写了loadview里面没有创建控制器的view，就不能使用self.view会造成死循环"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "-(void)loadview {\n  self.view.backgroundColor = [UIColor redColor];\n}\n// 会造成死循环，因为self.view没有获取到控制器的view,就会调用loadview创建控制器的view相互调用就进入死循环。"
+    },
+    {
+      "type": "markdown",
+      "data": "- 控制器view的决定权: 重写loadview->storyboard->nibName->xib\n控制器的view是延迟加载的\n\n## 控制器view xib(创建)\n- 加载跟类名相同的xib\n- 如果描述控制器View的xib跟控制器的类名相同，就会去加载\n- 只有控制器的init方法底层会调用initWithNibName:bundle:\n- 只要通过initWithNibName:bundle:初始化控制器,并且nibName为nil,就会执行以下几步。\n    - 1.寻找有没有跟控制器类名同名但是不带Controller的xib，如果有就会去加载（XMGView.xib\n    - 2.寻找有没有跟控制器类名同名的xib，如果有就会去加载(XMGViewController.xib)\n    - 3.如果都没有找到，创建空的view\n"
+    }
+  ]
+}

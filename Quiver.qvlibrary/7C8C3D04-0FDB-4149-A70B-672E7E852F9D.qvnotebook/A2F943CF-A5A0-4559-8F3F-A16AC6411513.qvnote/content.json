@@ -1,0 +1,27 @@
+{
+  "title": "音频播放",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "## AVFoundation框架\n1. 可以进行录音\n2. 播放音效(短暂音频)\n3. 播放音乐（本地/远程）\n4. 播放视频（本地/远程）\n\n## 录音\n- 主要的类：AVAudioRecorder\n\n### 步骤\n  1.1 要保存的路径(沙盒路径)\n  1.2 拼接全路径, caf是录音文件的格式,如mp3\n  1.3 得到路径的URL\n  1.4 设置录音的setting\n  1.5 调用prepareToRecord/record/stop等方法对音频控制"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "- (void)viewDidLoad {\n    [super viewDidLoad];\n    \n    // 得到cache的路径\n    NSString *cachePath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];\n    \n    NSString *recordPath = [cachePath stringByAppendingPathComponent:@\"123.caf\"];\n    NSLog(@\"local path = %@\", recordPath);\n    \n    // 得到url\n    NSURL *recordUrl = [NSURL URLWithString:recordPath];\n    \n    // 音频设置\n    /**\n     *  AVEncoderAudioQualityKey: 音频质量\n        AVEncoderBitRateKey: 比特率\n        AVNumberOfChannelsKey：通道\n        AVFormatIDKey：音频编码\n        AVSampleRateKey：速率\n     */\n    NSDictionary *recordSetDic = @{\n                                          AVEncoderAudioQualityKey : @(AVAudioQualityLow),\n                                          AVEncoderBitRateKey : @(16),\n                                          AVNumberOfChannelsKey : @(2),\n                                          AVFormatIDKey : @(kAudioFormatLinearPCM),\n                                          AVSampleRateKey : @(8000.0)\n                                          };\n    \n    // 创建录音对象\n    _audioRecoder = [[AVAudioRecorder alloc] initWithURL:recordUrl settings:recordSetDic error:nil];\n}\n\n- (void)didReceiveMemoryWarning {\n    [super didReceiveMemoryWarning];\n    // Dispose of any resources that can be recreated.\n}\n- (IBAction)startRecord:(id)sender {\n    \n    [self.audioRecoder prepareToRecord]; // 准备录音\n    [self.audioRecoder record];\n    \n}\n- (IBAction)stopRecord:(id)sender {\n    \n    // 停止录音\n    [self.audioRecoder stop];\n}\n"
+    },
+    {
+      "type": "markdown",
+      "data": "## 播放音效\n- 可以播放短音效,包括震动\n\n### 使用SystemSoundID播放音效\n  1.1 使用SystemSoundID(C语言AudioServicesPlaySystemSound函数)方式播放短音效\n  1.2 创建SystemSoundID\n  1.3 创建音效资源url,url类型为CFURLRef类型,使用(__bridge CF type)方式桥联,不需要手动释放\n  1.4 调用AudioServicesCreateSystemSoundID生成系统的ID\n  1.5 使用c语言函数播放系统ID"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "SystemSoundID soundId = 0;\n    // 2.创建音效资源url\n    // SINGLE: 使用(__bridge CF type)方式桥联,不需要手动释放\n    // 使用(__bridge_retained CF type)方式桥联,需要手动释放,需要调用CFRelease(CFTypeRef cf)方法释放\n    CFURLRef url = (__bridge CFURLRef)[[NSBundle mainBundle] URLForResource:@\"buyao.wav\" withExtension:nil];\n    \n    // 通过url生成SystemSoundID\n    AudioServicesCreateSystemSoundID(url, &soundId);\n    \n    // 播放音效没有带震动\n   // AudioServicesPlaySystemSound(soundId);\n    \n    // 播放带震动\n   // AudioServicesPlayAlertSound(soundId);\n    \n    // 只震动\n    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);"
+    },
+    {
+      "type": "markdown",
+      "data": "## 播放音频\n```objc\n NSError *error = nil;\n    \n   // NSURL *url = [NSURL URLWithString:@\"http://mr3.doubanio.com/96d87cfad6d5f823ca7e225bf1517aed/0/fm/song/p1006_128k.mp4\"];\n    NSURL *url = [[NSBundle mainBundle] URLForResource:@\"mute.mp3\" withExtension:nil];\n    AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];\n    NSLog(@\"%@\", error);\n    [player play];\n\n```"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "title": "effectojbect-c的学习",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "# effect_objectC\n## 第三条\n - 尽量使用@class先告诉编译器，再在.m文件中导入@import 某个文件\n \n\n## 第四条\n- 多用字面量语法，少用与之等价的方法\n- 例子:"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "NSNumber *number = [NSNumber numberWithInt:2]; // error\nNSNumber *number2 = @2; // right\nint x = 2;\nfloat y = 5.23;\nNSNumber *number3 = @(x*y);"
+    },
+    {
+      "type": "markdown",
+      "data": "- 数组字面值\n- 格式:\n    - 需要用[]来初始化"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "NSArray *array = [[NSArray alloc] initWithObjects:@\"dog\",@\"cat\", @\"mouse\",nil];\nNSArray *array1 = @[@\"dog\",@\"cat\", @\"mouse”];"
+    },
+    {
+      "type": "markdown",
+      "data": "- 注意的是:创建字面值数组时，如果括号中对象有nil的对象，则会抛出异常。如果是第一种方法则不回，但是会出现一个更大的问题"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "id object1 = @\"dog\";\nid object2 = nil;\nid object3 = @\"cat\";\nNSArray *array = [[NSArray alloc] initWithObjects:object1,object2, object3,nil]; /**只有一个dog,因为object2是nil,结束了数组的创建*/\nNSArray *array1 = @[object1, object2, object3];\n//抛出异常"
+    },
+    {
+      "type": "markdown",
+      "data": "- 总结: 所以使用字面值的方法创建会更安全\n- 字面值创建字典\n- 格式:\n    - 字典需要用{}来初始化字面值"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:@\"Matt\",@\"fistname\",[NSNumber numberWithInt:28], @\"age\",\n    nil];\nNSDictionary *dict2 = @{@\"firstname\":@\"Matt\", @\"age\":@28};"
+    },
+    {
+      "type": "markdown",
+      "data": "- 总结:局限性:使用字面值创建出来的字符串，数组，字典对象都是不可变的。想要变成可变版本，需要复制一份。"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "NSMutableArray *mutabbleArray = [@[@1, @2, @3] mutableCopy];"
+    },
+    {
+      "type": "markdown",
+      "data": "- 要点:\n- 1.应该通过下标操作来访问数组的下标或字典中的键所对应的元素\n- 2.使用字面值创建数组或者字典时，若值有Nil时，会抛出异常。\n\n## 第四条\n- 使用常量来代替#define 宏\n- 在实现文件中使用static const来定义”只在编译单元内可见的常量\"\n\n\n"
+    }
+  ]
+}

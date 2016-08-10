@@ -1,0 +1,25 @@
+{
+  "title": "xcode的调试技巧",
+  "cells": [
+    {
+      "type": "text",
+      "data": "1.&nbsp;<span style=\"color: rgb(37, 37, 37); font-family: 'Helvetica Neue', Helvetica, STheiti, 微软雅黑, 黑体, Arial, Tahoma, sans-serif, serif; font-size: 14px; font-variant-ligatures: normal; font-variant-position: normal; font-variant-numeric: normal; font-variant-alternates: normal; font-variant-east-asian: normal; line-height: 28px; widows: 1; background-color: rgb(250, 250, 250);\">Edit Scheme”（或者通过热键?&lt;），然后选择Diagnostics选项卡，勾选Enable NSZombie Objects选项。</span><div style=\"widows: 1;\"><font face=\"Helvetica Neue, Helvetica, STheiti, 微软雅黑, 黑体, Arial, Tahoma, sans-serif, serif\"><span style=\"font-size: 14px;\">作用：发生在崩溃的时候可以打印出奔溃的一些信息</span></font></div>"
+    },
+    {
+      "type": "text",
+      "data": "2. 点击<img src=\"quiver-image-url/84453BA5FACCF61F6D71BCC510957F03.png\" alt=\"52E7E070-1D93-48D0-B975-4A6615EC0342.png\">左下角添加<span style=\"color: rgb(37, 37, 37); font-family: 'Helvetica Neue', Helvetica, STheiti, 微软雅黑, 黑体, Arial, Tahoma, sans-serif, serif; font-size: 14px; font-variant-ligatures: normal; font-variant-position: normal; font-variant-numeric: normal; font-variant-alternates: normal; font-variant-east-asian: normal; line-height: 28px; widows: 1; background-color: rgb(250, 250, 250);\">Add Breakpoint可以添加异常断点，发生异常的时候停留在异常发生的地方</span><div style=\"widows: 1;\"><font face=\"Helvetica Neue, Helvetica, STheiti, 微软雅黑, 黑体, Arial, Tahoma, sans-serif, serif\"><span style=\"font-size: 14px;\">作用: 发生崩溃的时候断点</span></font></div>"
+    },
+    {
+      "type": "text",
+      "data": "3.&nbsp;<span style=\"color: rgb(37, 37, 37); font-family: 'Helvetica Neue', Helvetica, STheiti, 微软雅黑, 黑体, Arial, Tahoma, sans-serif, serif; font-size: 14px; font-variant-ligatures: normal; font-variant-position: normal; font-variant-numeric: normal; font-variant-alternates: normal; font-variant-east-asian: normal; line-height: 28px; widows: 1; background-color: rgb(250, 250, 250);\">Xcide的“Product”菜单，选择Analyzer选项（或者使用热键? shift B）</span><div style=\"widows: 1;\"><font face=\"Helvetica Neue, Helvetica, STheiti, 微软雅黑, 黑体, Arial, Tahoma, sans-serif, serif\"><span style=\"font-size: 14px;\"><u>作用: 静态分析，用来警告编译器不会警告的问题和一些个人的内存泄漏和死存储</u></span></font></div>"
+    },
+    {
+      "type": "text",
+      "data": "4. 点击某个断点，进去编译模式<div>作用: 让断点在符合条件情况下进入</div>"
+    },
+    {
+      "type": "text",
+      "data": "5.&nbsp;<span style=\"color: rgb(37, 37, 37); font-family: 'Helvetica Neue', Helvetica, STheiti, 微软雅黑, 黑体, Arial, Tahoma, sans-serif, serif; font-size: 14px; font-variant-ligatures: normal; font-variant-position: normal; font-variant-numeric: normal; font-variant-alternates: normal; font-variant-east-asian: normal; line-height: 28px; widows: 1; background-color: rgb(250, 250, 250);\">Debug菜单中Breakpoints-&gt;Create Symbolic Breakpoint</span><div><span style=\"color: rgb(37, 37, 37); font-family: 'Helvetica Neue', Helvetica, STheiti, 微软雅黑, 黑体, Arial, Tahoma, sans-serif, serif; font-size: 14px; font-variant-ligatures: normal; font-variant-position: normal; font-variant-numeric: normal; font-variant-alternates: normal; font-variant-east-asian: normal; line-height: 28px; widows: 1; background-color: rgb(250, 250, 250);\">作用: 快速定位</span></div>"
+    }
+  ]
+}

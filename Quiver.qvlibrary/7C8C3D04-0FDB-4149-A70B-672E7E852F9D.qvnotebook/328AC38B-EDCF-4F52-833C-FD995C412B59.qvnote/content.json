@@ -1,0 +1,90 @@
+{
+  "title": "network的网络",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "#网络\n## ios7.0 使用http注意\n- App Transport Security has blocked a cleartext HTTP - - - (http://) resource load since it is insecure\n - 这是在xcode7中不能使用明文的http来请求，需要在Info.plist设置\n- 设置如下:\n![http.png](quiver-image-url/6F447ACAE068C9D81F9E247471C2D61A.png)\nNSAppTransportSecurity\nNSAllowsArbitraryLoads\n\n## nsdata\n- 可以用CFTimeInterval begin = CFAbsoluteTimeGetCurrent();\n- NSDate* begin = [NSDate date];得到当前的时间\n\n## http协议\n- 超文本链接协议，是可靠链接。\n- 一次请求对应一次，传输完就断开请求\n- 协议的方法：post/get\n- get 查询数据\n- post 增加/修改数据\n\n### ios发送http请求的解决方案\n1. ios原生\n    1. NSURLConnection:用法简单，最古老的方案\n    2. NSURLSession: 比NSURLConnection强大，推荐使用\n    3. CFNetWork:NSURL*底层，纯c语言\n2. 第三方框架\n    1. ASIHTTPRequest：http终结者，功能极其强大，可惜早已停止更新\n    2. AFNetWorking:简单易用，提供了基本常用的功能，维护和使用者多。\n    3. MKNetworkKit:简单易用，维护和使用者少\n\n- 建议:企业最好使用第三方框架\n\n###URL\n- url的基本格式:协议://主机地址/路径\n- http://www.520it.com/img/logo.png\n-协议：不同的协议，代表着不同的资源查找方式、资源传输方式，http\n- 主机地址：存放资源的主机（服务器）的IP地址（域名),www.520it.com\n- 路径：资源在主机（服务器）中的具体位置,img/logo.png\nurl常见的协议:http, https, file, mailto,ftp\n\n\n### http通信过程-请求\n- HTTP协议规定：1个完整的由客户端发给服务器的HTTP请求中包含以下内容\n    - 请求头：包含了对客户端的环境描述、客户端请求信息等"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "GET /minion.png HTTP/1.1   // 包含了请求方法、请求资源路径、HTTP协议版本\nHost: 120.25.226.186:32812 \t// 客户端想访问的服务器主机地址\nUser-Agent: Mozilla/5.0  // 客户端的类型，客户端的软件环境\nAccept: text/html, */* \t// 客户端所能接收的数据类型\nAccept-Language: zh-cn \t// 客户端的语言环境\nAccept-Encoding: gzip \t// 客户端支持的数据压缩格式"
+    },
+    {
+      "type": "markdown",
+      "data": "    - 请求体：客户端发给服务器的具体数据，比如文件数据(POST请求才会有)\n\n### HTTP通信过程 - 响应\n- 客户端向服务器发送请求，服务器应当做出响应，即返回数据给客户端\n- HTTP协议规定：1个完整的HTTP响应中包含以下内容\n    - 响应头：包含了对服务器的描述、对返回数据的描述"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "HTTP/1.1 200 OK            // 包含了HTTP协议版本、状态码、状态英文名称\nServer: Apache-Coyote/1.1 \t\t// 服务器的类型\nContent-Type: image/jpeg \t\t// 返回数据的类型\nContent-Length: 56811 \t\t// 返回数据的长度\nDate: Mon, 23 Jun 2014 12:54:52 GMT\t// 响应的时间"
+    },
+    {
+      "type": "markdown",
+      "data": "    - 响应体：服务器返回给客户端的具体数据，比如文件数据\n\n## 常用的响应码状态\n![error.png](quiver-image-url/D2D3BC944C14F907B1A9B3530C84FB36.png)\n\n## URLConnction用法\n### 常用类\n- NSURL：请求地址\n- NSURLRequest: 一个请求\n- 连接异步和同步两个方式\n- 同步方式"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "-(void)NSURLConnection_sync {\n    // http网站\n    NSURL *url = [NSURL URLWithString:@\"http://www.oschina.net/translate/best-swift-tutorials-with-examples\"];\n    // URLRequest 构造\n    NSURLRequest *URLRequest = [NSURLRequest requestWithURL:url];\n\n    NSHTTPURLResponse *response = nil;\n    NSError *error = nil;\n    // 同步\n    NSData *data = [NSURLConnection sendSynchronousRequest:URLRequest returningResponse:&response error:&error];\n\n    NSLog(@\"data length = %zd\", data.length);\n    NSLog(@\"error = %ld\", (long)error.code);\n    NSLog(@\"domain= %@\", error.domain);\n}"
+    },
+    {
+      "type": "markdown",
+      "data": "- 异步"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "-(void)NSURLConnection_async {\n    // http网站\n    NSURL *url = [NSURL URLWithString:@\"http://www.oschina.net/translate/best-swift-tutorials-with-examples\"];\n\n    // URLRequest 构造\n    NSURLRequest *URLRequest = [NSURLRequest requestWithURL:url];\n\n    // 异步\n    [NSURLConnection sendAsynchronousRequest:URLRequest queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse * _Nullable response, NSData * _Nullable data, NSError * _Nullable connectionError) {\n        NSLog(@\"current = %@\", [NSThread currentThread]);\n        NSString *recvStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];\n        NSLog(@\"%@\", recvStr);\n    }];\n}"
+    },
+    {
+      "type": "markdown",
+      "data": "###代理, 遵循NSURLConnectionDataDelegate"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "-(id)initWithRequest:(NSURLRequest *)request delegate:(id)delegate;\n+(NSURLConnection*)connectionWithRequest:(NSURLRequest *)request delegate:(id)delegate;\n-(id)initWithRequest:(NSURLRequest *)request delegate:(id)delegate startImmediately:(BOOL)startImmediately;"
+    },
+    {
+      "type": "markdown",
+      "data": "- 在startImmediately = NO的情况下，需要调用start方法开始发送请求\n- NSURLConnectionDataDelegate协议中的代理方法"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "开始接收到服务器的响应时调用\n-(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response;\n####NSURLConnectionDelegate\n接收到服务器返回的数据时调用（服务器返回的数据比较大时会调用多次)\n-(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data;\n服务器返回的数据完全接收完毕后调用\n-(void)connectionDidFinishLoading:(NSURLConnection *)connection;\n请求出错时调用（比如请求超时）\n-(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error;"
+    },
+    {
+      "type": "markdown",
+      "data": "####NSMutableURLRequest\n- NSMutableURLRequest是NSURLRequest的子类，常用方法有:"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "setTimeoutInterval //设置请求时间\nsetHTTPMethod      // 设置请求方法，get/post\nsetHTTPBody        // 设置请求体\n(void)setValue:(NSString *)value forHTTPHeaderField:(NSString *)field // 请求头"
+    },
+    {
+      "type": "markdown",
+      "data": "#### 创建GET和POST请求\n- get请求"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "NSString *urlStr = [@\"http://120.25.226.186:32812/login2?username=小码哥&pwd=520it\" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];\nNSURL *url = [NSURL URLWithString:urlStr];\nNSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];"
+    },
+    {
+      "type": "markdown",
+      "data": "- post请求"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "NSString *urlStr = @\"http://120.25.226.186:32812/login\";\nNSURL *url = [NSURL URLWithString:urlStr];\nNSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];\nrequest.HTTPMethod = @\"POST\";\n// 请求体\nNSString *bodyStr = @\"username=520it&pwd=520it\";\nrequest.HTTPBody = [bodyStr dataUsingEncoding:NSUTF8StringEncoding];"
+    },
+    {
+      "type": "markdown",
+      "data": "- 多值参数\n- 有时候一个参数名，可能会对应多个值\n- http://120.25.226.186:32812/weather?place=Beijing&place=Henan&place=Hunan\n- 服务器的place属性是一个数组\n\n\n## NSURLSession详解\n- 涉及的类\n    1. NSURLSessionConfiguration 配置信息\n    2. NSURLSessionTask用于数据传输，下载，上传\n"
+    }
+  ]
+}

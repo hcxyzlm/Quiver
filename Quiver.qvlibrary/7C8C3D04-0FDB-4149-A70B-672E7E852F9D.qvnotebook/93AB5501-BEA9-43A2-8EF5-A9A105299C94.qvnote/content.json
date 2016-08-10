@@ -1,0 +1,54 @@
+{
+  "title": "UIScrollView的使用",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "# UIScrollView的使用\n- 设置contentSize可以滚动哪里\n\n## UIScrollview使用注意地方\n- ios7以后，UIViewController里面加一个UIScrollView,如果有导航栏的存在，会默认帮UIScrollView设置y位置为64，解决这个问题需要在ViewController设置一个属性。\n    - self.automaticallyAdjustsScrollViewInsets = false\n    - 或者在XB界面取消勾选Adjust Scroll View Insets\n\n## 常用属性\n- contentOffset:滚动的位置\n- contentSize可以滚动显示内容的尺寸\n- contentInset:可以额外增加四周的滚动区域，一般用来避免srcollview被其他空间挡住，一般是内容的四周。如果：设置top= 20，向上只能滚动到20的高度位置\n- contentInset就是ContentInset就是ContentSize顶点相对于scrollview的位置，比如你的ContentInse为（0， 100）那么你的contentview就是从scrollview的(0 ,100)开始显示\n- 想要监听滚动，需要设置delegate\n- pagingEnabled 开启分页功能\n-showsHorizontalScrollIndicator 水平滚动条是否显示\n\n## 代理"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "-(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView;\n//开始拖拽时调用\n- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate;\n//结束拖拽时调用"
+    },
+    {
+      "type": "markdown",
+      "data": "\n## uiscrollview无法滚动可能原因有\n- 没有设置contentSize\n- 设置scrollEnabled为NO\n- 没有接收到摸出事件，userInteractionEnabled= NO\n\n\n## UIScrollView缩放\n- 要设置代理\n- 设置缩放的最大最小比例"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "// 设置缩放大小\n    self.scorllView.maximumZoomScale = 2.0;\n    self.scorllView.minimumZoomScale = 0.2;"
+    },
+    {
+      "type": "markdown",
+      "data": "- 返回缩放的子控件"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "// 返回uiscrollview的缩放对象，返回的对象必须是UIScrollView的子控件\n-(nullable UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {\n\n    return self.imageView;\n}\n// 缩放时的代理\n-(void)scrollViewDidZoom:(UIScrollView *)scrollView {\n\n    NSLog(@\"缩放ing -------%f\",scrollView.zoomScale);\n}"
+    },
+    {
+      "type": "markdown",
+      "data": "\n## UIPageControl 分页\n- numberOfPages总的页数\n- currentPage 当前页码\n- 会主动发生改变\n\n## 定时器\n- 创建"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "self.timer = [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(nextPage) userInfo:nil repeats:YES];\n// 每隔1.5秒回nextPage方法，最后一个参数为是否重复"
+    },
+    {
+      "type": "markdown",
+      "data": "- 防止ui线程阻塞定时器"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "// 防止ui线程阻塞定时器，把定时器的优先级加大\n    [[NSRunLoop mainRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];"
+    },
+    {
+      "type": "markdown",
+      "data": "- 停止 - invalidate\n- 运行 - fire\n\n"
+    }
+  ]
+}

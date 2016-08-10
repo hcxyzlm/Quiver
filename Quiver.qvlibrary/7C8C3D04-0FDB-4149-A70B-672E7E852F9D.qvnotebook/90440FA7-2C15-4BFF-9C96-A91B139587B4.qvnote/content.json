@@ -1,0 +1,9 @@
+{
+  "title": "UITabBarController",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "# UITabBarController\n\n## UITabBar\n- 如果UItabBarController有多少个子控制器，那么UITabBar内部就有多少个UITabBarButton作为子控制器。\n- UITabBarButton展示什么内容，有子控制器的tabBarItem\n- 决定。\n\n\n## 主流的app框架\n- UITabBarController作为最底层的界面\n- 然后加上四个UINavagationContrll作为子controller\n- 连线的时候选择view controller\n\n"
+    }
+  ]
+}

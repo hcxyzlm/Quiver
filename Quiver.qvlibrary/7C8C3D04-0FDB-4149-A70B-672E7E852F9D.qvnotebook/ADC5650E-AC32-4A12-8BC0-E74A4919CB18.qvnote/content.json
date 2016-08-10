@@ -1,0 +1,13 @@
+{
+  "title": "Category作用",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "## 使用分类添加成员属性\n- 使用objc_getAssociatedObject实现get方法\n```objc\nid objc_getAssociatedObject(id object, void *key)\n// 第一个参数是self, 第二个参数是设置进去的value值，可以自己定义\n```\n- 使用objc_setAssociatedObject使用set方法\n```objc\nOBJC_EXPORT void objc_setAssociatedObject(id object, const void *key, id value, objc_AssociationPolicy policy)\n// 参数\n1.一般为self\n2.用来查询的这个属性的value, 可以自己定义\n3.定义的属性\n4.定义属性的范围，有strong/weak/copy的属性\n```\n- 例子\n```objc\n  static char propertyValue;\n    @interface NSObject (CategoryWithProperty)\n    @property (nonatomic, strong) NSObject *property;\n  @end\n  @implementation NSObject (CategoryWithProperty)\n\n    -(NSObject *)property {\n        return objc_getAssociatedObject(self,               @propertyValue);\n    }\n\n    -(void)setProperty:(NSObject *)value {\n        objc_setAssociatedObject(self, @propertyValue,         value, OBJC_ASSOCIATION_RETAIN_NONATOMIC);\n    }\n@end\n```"
+    },
+    {
+      "type": "markdown",
+      "data": ""
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "title": "UIApplication",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "# UIApplication的作用\n\n##作用\n-  做应用级别的操作\n\n##UIApplcation的属性\n- applicationIconBadgeNumber 应用程序数字图标\n（需要设置registerUserNotificationSettings进行配置）\n- networkActivityIndicatorVisible 设置上网指示器\n- statusBarStyle 状态栏风格\n-applicationState 应用的状态\n\n\n## 方法\n- openURL 打开url\n- canOpenURL 是否可以打开url"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "/*\nURL:一个资源的唯一路径\nURL的组成 == 协议头:主机域名/路径\n网络资源URL的组成：http://www.baidu.com/1.png\n本地资源URL的组成：file:///1.png\n*/"
+    },
+    {
+      "type": "markdown",
+      "data": "- UIApplication打开资源的好处:不用判断用什么软件打开，系统会自动根据协议头判断。\n\n##设置app的的图标提醒数字"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "UIApplication* app = [UIApplication sharedApplication];\napp.applicationIconBadgeNumber = 10;\nUIUserNotificationSettings* setting = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge categories:nil];\n[app registerUserNotificationSettings:setting];"
+    },
+    {
+      "type": "markdown",
+      "data": "##设置联网状态\n   - app.networkActivityIndicatorVisible = YES;\n\n##显示隐藏状态栏\n- 在ViewController 重写prefersStatusBarHidden方法\n- 在plist里面添加一个字段View controller-based status bar设置为NO，然后调用UIAppcalition 属性statusBarHidden来设置\n\n## application 生命周期\n- 程序启动：willFinishLaunchingWithOptions->didFinishLaunchingWithOptions—>applicationDidBecomeActive\n- 按下Home键：applicationWillResignActive—>applicationDidEnterBackground\n- 从后台进入：applicationWillEnterForeground—》applicationDidBecomeActive\n\n##注意：\n- 程序首次已经完成启动时执行，若直接启动，launchOptions中没有数据；否则，launchOptions将包含对应方式的内容（比如从微信中启动节奏大师—）\n- 当有人打电话来：applicationWillResignActive（将进入后台）暂停正在执行的任务\n- applicationDidEnterBackground（已经进入后台）用来释放内存，保存数据的工作\n- applicationWillEnterForeground 用来恢复数据\n- applicationWillTerminate 在ios4之后这个方法一般不会自动调用。\n\n\n## UIWindow\n- 手动代码创建UIWidnow"
+    },
+    {
+      "type": "code",
+      "language": "objectivec",
+      "data": "// 创建window\nself.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];\n// 创建UIViewController\n// 设置根容器\nself.window.rootViewController = view;\n// 显示窗口\n[self.window makeKeyAndVisible];"
+    },
+    {
+      "type": "markdown",
+      "data": ""
+    }
+  ]
+}
