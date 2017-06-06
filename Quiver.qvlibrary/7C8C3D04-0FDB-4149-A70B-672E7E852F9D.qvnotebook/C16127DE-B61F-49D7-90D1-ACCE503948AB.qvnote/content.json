@@ -1,9 +1,9 @@
 {
-  "title": "线程",
+  "title": "ios多线程",
   "cells": [
     {
       "type": "markdown",
-      "data": "# Thread\n\n## 主线程(ui线程)\n- 作用\n    - 显示/刷新UI界面\n    - 处理UI事件(比如点击事件，滚动事件)\n- 注意: 不要将耗时操作放在主线程，因为界面做太多耗时操作就会卡死等现象。\n- 耗时操作会卡住主线程，严重影响UI的流畅度，给用户一种“卡”的坏体验\n\n##ios多线程的实现方案\n- 1) pthead—> unix/ios的跨平台线程,c语言底层\n- 2) NSThread—>程序员管理，偶尔使用,oc语言\n- 3）GCD—>简单易用，基于c语言，自动管理\n- 4）NSOperation,比GCD多了一些更简单实用的功能，基于oc\n\n## pthead使用方式"
+      "data": "## IOS进程\n1. 进程的五种状态模型\n2. 新建-->就绪-->运行-->阻塞-->结束\n\n## 线程\n1. 线程是进程基本的执行单元\n2. 进程的所有任务都是在线程中执行\n\n## 线程使用场景\n1. 网络请求\n2. 图片加载\n3. 数据库操作\n4. 文件处理\n5. 数据执行\n6. 任务执行\n\n## 多线程的优缺点\n### 优点\n1. 简化了编程的模型\n2. 更加得轻量级\n3.提高了优化效率\n4. 提高了资源的利用率\n\n### 缺点\n1. 增加了程序设计复杂度\n2. 占用内存空间\n3. \n\n# Thread\n\n## 主线程(ui线程)\n- 作用\n    - 显示/刷新UI界面\n    - 处理UI事件(比如点击事件，滚动事件)\n- 注意: 不要将耗时操作放在主线程，因为界面做太多耗时操作就会卡死等现象。\n- 耗时操作会卡住主线程，严重影响UI的流畅度，给用户一种“卡”的坏体验\n\n##ios多线程的实现方案\n- 1) pthead—> unix/ios的跨平台线程,c语言底层\n- 2) NSThread—>程序员管理，偶尔使用,oc语言\n- 3）GCD—>简单易用，基于c语言，自动管理\n- 4）NSOperation,比GCD多了一些更简单实用的功能，基于oc\n\n## pthead使用方式"
     },
     {
       "type": "code",
@@ -12,7 +12,7 @@
     },
     {
       "type": "markdown",
-      "data": "\n## pthread 多线程方式\n- 方法\n    - (NSThread *)mainThread; // 获得主线程\n    - isMainThread; // 是否为主线程\n    - isMainThread; // 是否为主线程\n    - [NSThread currentThread] // 获得当前线程\n    - name   // 线程的名字\n    - start  // 启动线程\n    - sleepUntilDate:(NSDate *)date // 暂停挂起\n    - sleepForTimeInterval:(NSTimeInterval)ti // 挂起\n    - exit // 退出线程\n    - cancle: 设置线程退出状态，并不会立刻退出\n- 创建线程方式\n    -创建线程后自动启动线程\n    - [NSThread detachNewThreadSelector:@selector(run) toTarget:self withObject:nil];\n    - 隐式创建并启动线程\n    - [self performSelectorInBackground:@selector(run) withObject:nil];\n- 注意：上述2种创建线程方式的优缺点\n    - 优点：简单快捷\n    - 缺点：无法对线程进行更详细的设置\n\n## 例子"
+      "data": "\n## pthread 多线程方式\n- 方法\n    - (NSThread *)mainThread; // 获得主线程\n    - isMainThread; // 是否为主线程\n    - isMainThread; // 是否为主线程\n    - [NSThread currentThread] // 获得当前线程\n    - name   // 线程的名字\n    - start  // 启动线程\n    - sleepUntilDate:(NSDate *)date // 暂停挂起\n    - sleepForTimeInterval:(NSTimeInterval)ti // 挂起\n    - exit // 退出线程\n    - cancle: 设置线程退出状态，并不会立刻退出\n- 创建线程方式\n\n    - init - (instancetype)initWithTarget:(id)target selector:(SEL)selector object:(id)argument方式\n    -创建线程后自动启动线程\n    - [NSThread detachNewThreadSelector:@selector(run) toTarget:self withObject:nil];\n    - 隐式创建并启动线程\n    - [self performSelectorInBackground:@selector(run) withObject:nil];\n- 注意：上述2种创建线程方式的优缺点\n    - 优点：简单快捷\n    - 缺点：无法对线程进行更详细的设置\n\n## 例子"
     },
     {
       "type": "code",
@@ -39,7 +39,7 @@
     },
     {
       "type": "markdown",
-      "data": "\n#GCD\n- GCD: Grand Central Dispatch(伟大的中枢调度器)\n- 任务和队列:\n- 任务: 执行什么操作\n- 队列: 用来存放任务\n- 将任务添加到队列中, GCD会自动将队列中的FIFO\n###gcd执行任务\n- 1. 同步方式(跟主线程同步执行)"
+      "data": "\n#GCD\n- GCD: Grand Central Dispatch(伟大的中枢调度器)\n- 任务和队列:\n- 任务: 执行什么操作\n- 队列: 用来存放任务\n- 将任务添加到队列中, GCD会自动将队列中的FIFO\n\n### gcd使用的两个步骤\n1. 定制任务--》确定想做的事情\n2. 将任务添加到队列中\n\n## 容易混淆的术语\n1. 同步，异步，并发，串行\n2. 区别: 同步只是在当前线程中执行任务，不具备开启新线程的能力\n3. 异步: 可以在新的线程中执行能力，具备开启线程的能力\n4. 并发和串行的主要影响：任务的执行方式\n5. 并发： 允许多个任务并发(同时)执行\n6. 串行: 一个任务执行完毕，再执行下一个任务\n\n### gcd执行任务\n- 1. 同步方式(在当前线程中同步执行， 不开辟线程)"
     },
     {
       "type": "code",
@@ -48,7 +48,7 @@
     },
     {
       "type": "markdown",
-      "data": "- 2.异步方式(跟主线程异步执行)"
+      "data": "- 2.异步方式(在当前线程异步执行，开辟新线程)"
     },
     {
       "type": "code",
@@ -57,7 +57,7 @@
     },
     {
       "type": "markdown",
-      "data": "###创建队列\n- 并发队列\n1. dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0); // 获取全局的并发队列\n2. dispatch_queue_create(\"com.520it.queue\", DISPATCH_QUEUE_CONCURRENT); 当前的并发队列"
+      "data": "###创建队列\n- 并发队列(跟异步执行才能发挥作用)\n1. dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0); // 获取全局的并发队列\n2. dispatch_queue_create(\"com.520it.queue\", DISPATCH_QUEUE_CONCURRENT); 当前的并发队列"
     },
     {
       "type": "code",
@@ -75,7 +75,7 @@
     },
     {
       "type": "markdown",
-      "data": "### 任务和队列的组合情况\n- 同步+ 串行队列—>在主线程执行，任务依次执行,不能并发\n- 同步+ 并发行队列—> 在主线程执行，不会开启新的线程\n- 异步+ 并发队列—> 多条线程并发执行\n- 异步+ 串行队列—>会开启新的线程，队列中的任务依次执行，不能并发\n- 异步+ dispatch_get_main_queue主队列，只在主线程执行任\n- 注意:如果是同步+dispatch_get_main_queue队列会产生卡死现象，因为同步函数是一个需要等待主线程的串行任务执行完才能执行，而串行任务也需要一个个执行，也要等待多个串行任务执行完才能执行两个一起等，造成卡死现象。\n- demo, 会造成卡死"
+      "data": "### 任务和队列的组合情况\n- 同步+ 串行队列—>在主线程执行，任务依次执行,不能并发\n- 同步+ 并发行队列—> 在主线程执行，不会开启新的线程\n- 异步+ 并发队列—> 多条线程并发执行\n- 异步+ 串行队列—>会开启新的线程，队列中的任务依次执行，不能并发，开屏一个线程\n- 异步+ dispatch_get_main_queue主队列，只在主线程执行任\n- 注意:如果是同步+dispatch_get_main_queue队列会产生卡死现象，因为同步函数是一个需要等待主线程的串行任务执行完才能执行，而串行任务也需要一个个执行，也要等待多个串行任务执行完才能执行两个一起等，造成卡死现象。\n- demo, 会造成卡死"
     },
     {
       "type": "code",
@@ -93,7 +93,7 @@
     },
     {
       "type": "markdown",
-      "data": "\n## gcd进程间通信\n- 例子:"
+      "data": "\n## gcd进程间通信\n1. 常用方法\n2. self performSelectorOnMainThread\n3. \n- 例子:"
     },
     {
       "type": "code",
@@ -130,6 +130,10 @@
     {
       "type": "markdown",
       "data": "### 注意点: 单例不要使用继承，否则会出现连个子类共有一块内存的问题\n\n"
+    },
+    {
+      "type": "markdown",
+      "data": "## gcd使用不当会导致程序崩溃\n1. gcd卡死的情况 主线程 + 同步函数 + 主队列（会相互等待对方执行完）\n```objc\n- (void)gcd_main_sync{\n    \n    dispatch_queue_t queue = dispatch_get_main_queue();\n    NSLog(@\"主线程执行---> %@\", [NSThread currentThread]);\n    \n    dispatch_sync(queue, ^{\n         NSLog(@\"同步线程---> %@\", [NSThread currentThread]);\n    });\n    \n    NSLog(@\"线程执行完毕\");\n}\n2. // gcd卡死的情况 串行队列 + 同步函数 + 回到主队列主队列\n- (void)gcd_serial_sync{\n    \n    dispatch_queue_t queue = dispatch_queue_create(\"test.quese\", DISPATCH_QUEUE_SERIAL);\n    NSLog(@\"主线程执行---> %@\", [NSThread currentThread]);\n    \n    dispatch_sync(queue, ^{\n         NSLog(@\"同步线程---> %@\", [NSThread currentThread]);\n        dispatch_sync(dispatch_get_main_queue(), ^{\n            NSLog( @\"回到主线程-->%@\", [NSThread currentThread]);\n        });\n    });\n    \n    NSLog(@\"线程执行完毕\");\n}\n\n```\n\n## 信号量\n1. 相当于一个信号集一样，当信号集为的时候0的时候阻塞执行\n2. 当信号量大于等于1的时候，就可以执行，把信号量减1\n```objc\ndispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);\n    \n    NSMutableArray *array = [NSMutableArray array];\n    \n   dispatch_semaphore_t semaphore_t =  dispatch_semaphore_create(1);  // 创建信号量\n    \n    for (int i = 0; i < 20; i++) {\n        dispatch_async(queue, ^{\n            \n            dispatch_semaphore_wait(semaphore_t, DISPATCH_TIME_FOREVER );// 等待信号量为1或者大于1\n            \n            [array addObject:@(i)];\n            // 释放信号量\n            dispatch_semaphore_signal(semaphore_t);\n        });\n    }\n\n```"
     }
   ]
 }

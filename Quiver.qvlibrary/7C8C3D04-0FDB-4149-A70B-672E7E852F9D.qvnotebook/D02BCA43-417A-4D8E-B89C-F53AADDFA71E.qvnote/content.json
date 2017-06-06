@@ -1,0 +1,9 @@
+{
+  "title": "开发常用工具类",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "## appledoc  --生成文档工具\n1. 安装\n```objc\ngit clone git://github.com/tomaz/appledoc.git\ncd appledoc\nsudo sh install-appledoc.sh\n```\n\n2. 使用\n```objc\nappledoc -o ./doc --project-name ynote --project-company youdao . \n```\n3. 编译完成的Docset默认会放在/Users/用户名/Library/Developer/Shared/Documentation/DocSets路径下\n阅读在Xcode --> Window-->Documentation And API Reference 里面找啦，快捷键就是command+shift+0\n"
+    }
+  ]
+}

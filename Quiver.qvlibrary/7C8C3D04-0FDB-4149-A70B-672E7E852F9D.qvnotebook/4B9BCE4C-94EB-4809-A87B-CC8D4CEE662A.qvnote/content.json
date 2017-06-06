@@ -1,0 +1,9 @@
+{
+  "title": "开发遇到的问题",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "## ios开发的疑难杂症\n1. UIViewController添加子VC，子vc会有时候高度错乱，会减去49或者20高度。\n解决方法： self.edgesForExtendedLayout = UIRectEdgeAll;\n2. UITableViewCell初始化的宽度没有适配ios设置，初始值都是320\n   解决方法：\n```objc\n- (void)setFrame:(CGRect)frame\n{\n    frame.size.width = [UIScreen mainScreen].bounds.size.width;\n    [super setFrame:frame];\n    \n}\n```"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "title": "1. 逆向工程需要安装的软件",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "## 常用的分析软件\n1. 界面分析, reveal\n2. Theos：iOS越狱程序开发框架\n3. class-dump-z\n4. 反汇编工具:IDA / Hopper\n\n## 使用Theos来创建应用\n1. 配置环境变量,export THEOS=/opt/theos\n2. 命令行 $THEOS/bin/nic.pl\n3. 编译：打开命令行然后输入\nexport THEOS=/opt/theos/\nexport SDKVERSION=7.1\nexport THEOS_DEVICE_IP=xxx.xxx.xxx.xxx\n第二行定义你当前的SDK版本，我本机装的是7.1，最后一行定义你的设备的ip地址。"
+    }
+  ]
+}

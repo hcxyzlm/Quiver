@@ -58,6 +58,10 @@
     {
       "type": "markdown",
       "data": "- 图片裁剪核心代码\n- void CGContextClip(CGContextRef c); // 将当前上下文所绘制的路径裁剪出来(超过这个裁剪区域都不能展示)\n- 屏幕截屏核心代码- (void)renderInContext:(CGContextRef)ctx\n- 可以直接用view.layer调用即可\n"
+    },
+    {
+      "type": "markdown",
+      "data": "### 绘图步骤\n1. 获取画笔句柄 // CGContextRef ref =  UIGraphicsGetCurrentContext();\n2. 设置画笔设置 // CGContextSetStrokeColorWithColor(ref, [UIColor redColor].CGColor);\n3. 开始绘图     // CGContextBeginPath(ref); "
     }
   ]
 }

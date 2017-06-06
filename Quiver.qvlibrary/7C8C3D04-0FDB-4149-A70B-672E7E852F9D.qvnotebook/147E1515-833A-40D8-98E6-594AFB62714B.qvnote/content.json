@@ -1,0 +1,29 @@
+{
+  "title": "ios新技术学习渠道",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "## 新技术的了解渠道\n- wwc开发者大会\n- 官方文档\n- General -->Guides-->ios differ"
+    },
+    {
+      "type": "markdown",
+      "data": "## 程序员自我学习"
+    },
+    {
+      "type": "markdown",
+      "data": "## ios程序员技术的学习\n- 官方文档\n    sample code（系列代码）\n  - guide(指导)\n  - Reference（API参考）\n- 博客\n  - objc中国 \n  - cocochina \n  - 唐巧 \n  - 伯乐在线\n- 微博\n- 公众号\n  - ios技术分享\n  - 猿圈\n- 有自己的技术圈子"
+    },
+    {
+      "type": "markdown",
+      "data": "## 非ios的技术学习\n- 数据结构与算法\n- html5\n- javasprite\n- java(javase/android)\n- c++"
+    },
+    {
+      "type": "markdown",
+      "data": "## 非技术学习\n- 管理/心理学/幸福/创业\n- 网易公开课\n    1. 各种国际名牌大学的课堂视频\n    2. 名人讲座（ted）\n- 名人讲座/名人系列"
+    },
+    {
+      "type": "markdown",
+      "data": "## 快速上手公司项目\n- 使用reveal工具\n- 青花瓷抓包\n\n"
+    }
+  ]
+}

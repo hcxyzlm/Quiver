@@ -1,0 +1,9 @@
+{
+  "title": "iOS开发⼯工程师技能树",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "### 根据 [阿⾥巴巴面试资料](https://hit-alibaba.github.io/interview/iOS/ \"Title\")，感谢阿⾥的技术团队的分享\n\n### Objective-C\n  - Objective-C语言基础\n  - library,framework的制作\n  - Runtime 编程\n  - LLVM 原理和调优\n  \n### 操作系统\n  - iOS内存管理和调优\n  - iOS的文件系统和沙盒机制\n  - iOS多线程编程（Thread,GCD,NSOperation）\n  - iOS网络和服务器编程（NSURLConnection,NSURLSession）\n  - iOS系统的各种安全机制\n  \n### 网络编程\n  - iOS网络发送机制调整和优化（NSURLSession\n  - Socket编程\n  - 网络传输中的各种保障\n  - 对传输协议的调整优化\n  \n### 数据库&持久化方案\n  - 常规持久化方案（Keychain,NSUserDefaults,Sqlite,CoreData）\n  - 数据库的使用和设计（Sqlite）\n  - 数据结构优化，Sql调优\n  \n### 图形图像编程\n  - UIKit,Core Animation和Core Text的绘制\n  - Core Graphics, Quartz 2D, Media Player, AV Foundation\n  - OpenGL ES, GLKit, SpriteKit, SceneKit, Metal\n  \n### 数据结构和算法\n  - 基本的算法和数据结构（排序搜索算法, 数组, 队列）\n  - 较复杂数据结构的灵活应用（二叉树, 图等）\n  - 复杂的专项算法（图像识别算法, 拓扑定位等等）\n  \n### 安全方案\n  - 本地数据存储安全（Keychain）\n  - 授权和身份验证\n  - 传输安全（对称, 非对称, SSL）\n  - 传输安全（对称, 非对称, SSL）\n  \n### 业务能力\n  - 一般性业务功能需求分析及实现\n  - 重要业务模块的需求分析及实现\n  - 大规模产品或产品线的架构，系统设计和实现\n  - 平台级产品的架构，系统设计和实现\n"
+    }
+  ]
+}

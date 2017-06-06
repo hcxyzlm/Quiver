@@ -1,0 +1,13 @@
+{
+  "title": "ReactiveCocoa",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "### 简介\n1. 简称rac，使用block的方式来处理事件的发生"
+    },
+    {
+      "type": "markdown",
+      "data": "## 常见的事件流方式\n### 点击事件\n1. button的点击事件 rac_signalForControlEvents\n  ```objc\n   [[self.sendBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {\n        // 发送通知\n        \n       NSMutableArray *dataArray = [[NSMutableArray alloc] initWithObjects:@\"1\", @\"2\", @\"3\", nil];\n        [[NSNotificationCenter defaultCenter] postNotificationName:@\"postData\" object:dataArray];\n    }];\n  ```\n  \n2.文本的处理事件 rac_signalForControlEvents\n```objc\n[[self.content rac_signalForControlEvents:UIControlEventEditingChanged] subscribeNext:^(id x) {\n        NSLog(@\"输入%@\", x);\n    }];\n```\n\n3.手势事件 rac_gestureSignal\n  ```objc\n    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] init];\n   [[tap rac_gestureSignal] subscribeNext:^(id x) {\n       NSLog(@\"点击了view\");\n   }];\n    [self.view addGestureRecognizer:tap];\n  ```\n  \n  4.代理 rac_signalForSelector\n  ```objc\n  UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@\"代理\" message:@\"rac 代理\" delegate:self cancelButtonTitle:@\"cancle\" otherButtonTitles:@\"ok\", nil];\n    // self 是代理，所以要写self rac_signalForSelector\n    [[self rac_signalForSelector:@selector(alertView:clickedButtonAtIndex:) fromProtocol:@protocol(UIAlertViewDelegate)] subscribeNext:^(RACTuple* tuple) {\n        NSLog(@\"%@\",tuple.first);\n        NSLog(@\"%@\",tuple.second);\n        NSLog(@\"%@\",tuple.third);\n    }];\n    // RACTuple是一个集合，他下面的first,second是类的各个参数\n    // first 是alertView，second 是buttonIndex的索引\n  ```\n  5.通知 rac_addObserverForName\n  ```objc\n   [[self.sendBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {\n        // 发送通知\n        \n       NSMutableArray *dataArray = [[NSMutableArray alloc] initWithObjects:@\"1\", @\"2\", @\"3\", nil];\n        [[NSNotificationCenter defaultCenter] postNotificationName:@\"postData\" object:dataArray];\n    }];\n    [[[NSNotificationCenter defaultCenter ] rac_addObserverForName:@\"postData\" object:nil]\n     subscribeNext:^(NSNotification* notice) {\n         NSLog(@\"%@\", notice.object);\n    }];\n  ```\n  \n  6.KVO RACObserve(TARGET, KEYPATH)\n  ```objc\n    [RACObserve(scrollView, contentOffset) subscribeNext:^(id x) {\n        NSLog(@\"%@\", x);\n    }];\n    ```\n    \n  7.NSArray遍历\n  ```objc\n  NSMutableArray *dataArray = [[NSMutableArray alloc] initWithObjects:@\"1\", @\"2\", @\"3\", nil];\n    [dataArray.rac_sequence.signal subscribeNext:^(id x) {\n        NSLog(@\"%@\", x);\n    }];\n    ```"
+    }
+  ]
+}

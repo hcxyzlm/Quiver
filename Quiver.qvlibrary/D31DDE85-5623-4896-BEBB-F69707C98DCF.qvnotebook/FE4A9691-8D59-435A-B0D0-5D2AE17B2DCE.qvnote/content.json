@@ -1,5 +1,5 @@
 {
-  "title": "导航栏",
+  "title": "统一导航栏",
   "cells": [
     {
       "type": "text",
@@ -41,6 +41,10 @@
     {
       "type": "text",
       "data": "改进的方向:<div><div>1. 默认有返回item,默认点击pop</div><div>2. push UIViewController，自动判断有没有播放按钮</div><div>3. 支持添加UIButton和UIBarButtonItem两种view</div></div><div>4. 跟左滑返回的框架不冲突</div>"
+    },
+    {
+      "type": "text",
+      "data": "最终方案：&nbsp;网易云音乐的解决方案，需要注意是切换到原生的<b><span style=\"font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13.92px; font-variant-ligatures: normal; font-variant-position: normal; font-variant-numeric: normal; font-variant-alternates: normal; font-variant-east-asian: normal; line-height: 20.88px; widows: 1;\">navigationBar的比较简单</span></b>"
     },
     {
       "type": "text",

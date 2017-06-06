@@ -1,0 +1,9 @@
+{
+  "title": "线程的互斥锁",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "## 常用的线程锁\n1. @synchronized, nslock, NSRecursiveLock(递归锁)\n\n## 他们之间的区别\n@synchronized 和 Recursive都是允许同一个线程多次调用，而不会发生死锁的现象，但是用nslock同一个线程相互调用会发送死锁\n例子:\n```objc\nNSLock *lock = [[NSLock alloc] init];\n    \n    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);\n    \n    dispatch_async(queue, ^{\n        static void (^recursiveMethod)(int);\n        recursiveMethod = ^(int value) {\n            [lock lock];\n            if (value > 0) {\n                NSLog(@\"value = %zd\", value);\n                sleep(1);\n                recursiveMethod(value-1);\n                \n            }\n            [lock unlock];\n        };\n        \n        recursiveMethod(5);\n    });\n```\n在recursiveMethod方法中，递归调用，导致下一次递归的时候没有得到锁，每次进入block的时候，他都会去加锁，而第二次进入这个block的时候发现已经上了锁，导致死锁。\n如果使用NSRecursiveLock的话，他允许同一个线程多次加锁，不会构成死锁。递归锁他会跟踪他被block的次数，每次成功的lock都必须平衡调用unlock的操作。只有达到这种平衡，锁最后才会被释放。\n"
+    }
+  ]
+}

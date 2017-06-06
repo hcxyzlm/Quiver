@@ -1,0 +1,9 @@
+{
+  "title": "开会",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "## 开发流程\n1. 直接在develop分支修改线上bug\n2. develop-->开发分支<--> develop 代码改动  开发发布-->develop(release打tag)\n\n## 代码规范\n1. parma mark\n2. vc不要超过500行\n3. viewmodel->vc\n\n开发注意：\n2. 不能改动原来代码\n3. 下载测试\n4. 合到主分支"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "title": "git的命令区别",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "## git reset的命令的详解\n1. git reset --hard // 改变工作区，暂缓区，还有head引用的指向\n2. git reset --soft // 只改变引用的指向，即commit的指向，不影响暂缓区和工作区\n3. git reset --maxid 改变引用指向和暂缓区，不影响工作区\n\n## 禁止快进式推送\n1.用户1把一个文件推送到服务器上，用户2没有clone的情况下，也把同名文件推送到服务器上，会发生错误，如果使用git push -f 强制推送就会把文件覆盖。解决办法就是使用禁止快进式推送\n解决:更改服务器版本配置 git --git-dir=path/share.git config receive.denyNonFastForwards ture"
+    }
+  ]
+}

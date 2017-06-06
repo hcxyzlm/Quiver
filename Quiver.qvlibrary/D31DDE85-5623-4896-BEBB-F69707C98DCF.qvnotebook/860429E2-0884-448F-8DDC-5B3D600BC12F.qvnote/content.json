@@ -1,0 +1,17 @@
+{
+  "title": "阅读4期需求疑问点",
+  "cells": [
+    {
+      "type": "text",
+      "data": "小屏适配是否阅读已经做了<div>榜单cell书名是底部空白是否需要适配？</div><div><span style=\"font-family: SimSun; font-size: 11pt;\">客户端提前读取服务端的限免时间的技术方案是怎么样？</span></div><div><span style=\"font-family: SimSun; font-size: 11pt;\">没有缓存书单的书籍点击进入书籍列表是否需要缓存？</span></div><div><span style=\"font-family: SimSun; font-size: 11pt;\">听单跳转阅读，阅读没有任何阅读记录，展示服务器默认内容？如果有阅读记录，展示阅读记录章节介绍</span></div><div><span style=\"font-family: SimSun; font-size: 11pt;\">阅读器的呼吸动画触发点？</span></div><div><font face=\"SimSun\"><span style=\"font-size: 15px;\">取消关联后进入书籍下架后是否需要更新？</span></font></div><div><font face=\"SimSun\"><span style=\"font-size: 15px;\">精品标签的修改怎么改？</span></font></div>"
+    },
+    {
+      "type": "text",
+      "data": "1. 首页调整<div>精彩评论 云志</div><div>优化，播放器，互通 发哥</div>"
+    },
+    {
+      "type": "text",
+      "data": "阅读4期疑问点<div><span style=\"line-height: 1.5;\">1.&nbsp;</span><span style=\"font-family: 'Lucida Grande', 'Lucida Sans Unicode', sans-serif; font-size: 10.5pt; line-height: 1.5;\">【产品】首页新增榜单栏目的书籍列表书名下面空白需要适配？</span></div><div><span style=\"font-family: 'Lucida Grande', 'Lucida Sans Unicode', sans-serif; font-size: 10.5pt; line-height: 1.5;\">2.【产品】【后端】</span><span style=\"font-family: SimSun; font-size: 15px;\">客户端提前读取服务端的限免时间的技术方案是怎么样？</span></div><div><span style=\"font-family: SimSun; font-size: 15px;\">3.【产品】</span><span style=\"font-family: SimSun; font-size: 11pt;\">书单首页缓存第一页数据，书籍列表缓存全部数据，当书单首页从第二页进入书籍列表，</span><span style=\"font-family: SimSun; font-size: 15px;\">书籍列表还要缓存？</span></div><div><span style=\"font-family: SimSun; font-size: 15px;\">4.</span><span style=\"font-family: SimSun; font-size: 15px;\">【产品】</span><span style=\"font-family: SimSun; font-size: 15px;\">有限免的时候，有阅读记录，继续阅读文本是否要改成免费阅读？</span></div><div><span style=\"font-family: SimSun; font-size: 15px;\">5.【产品】热门作者栏目</span><span style=\"font-size: 11pt; font-family: SimSun;\">数据为空时或作者数</span><span style=\"font-size: 11pt; font-family: Calibri;\">≤3</span><span style=\"font-size: 11pt; font-family: SimSun;\">时整个栏目不展示,建议由服务端控制？这里是服务器控制是控制作者栏目展示还是数据个数？</span></div><div><span style=\"font-size: 11pt; font-family: SimSun;\">6.【产品】限免时间获取不到，怎么展示？</span></div><div><span style=\"font-size: 11pt; font-family: SimSun;\">7.【产品】</span><span style=\"font-family: SimSun; font-size: 15px;\">阅读器的呼吸动画触发点？当取消关联是否需要展示呼吸动画？</span></div><div><span style=\"font-family: SimSun; font-size: 15px;\">8.【产品】当取消关联后，点击进入书籍详情当这本书已经被下架了？怎么展示，是否需要更新客户端关联信息？</span></div><div><span style=\"font-family: SimSun; font-size: 15px;\">9.【产品】精品标签样式是否是加在书名后面？还是停靠在左上角？</span></div><div><span style=\"font-family: SimSun; font-size: 15px;\">10.【产品】精彩评论，如果自己点赞刚好点赞数超过精彩评论的个数，需要刷新添加到精彩评论？</span></div><div><span style=\"font-family: SimSun; font-size: 15px;\">11.【产品】搜索结果，增加阅读一栏，小屏手机展示不下那么多tab,需要支持滑动切换页面？&nbsp;</span></div><div><span style=\"font-family: SimSun; font-size: 11pt;\">&nbsp;</span></div>"
+    }
+  ]
+}

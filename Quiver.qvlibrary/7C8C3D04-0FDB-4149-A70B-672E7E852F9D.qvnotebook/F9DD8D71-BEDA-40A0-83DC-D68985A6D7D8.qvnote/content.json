@@ -1,0 +1,9 @@
+{
+  "title": "clang编译原理",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "### 编译过程\n  - 编译信息写入辅助文件，创建文件架构.app文件\n  - 处理文件打包信息\n  - 执行cocoapod编译前脚本，checkPods Manifest.lock\n  - 编译.m文件，使用 CompileC 和 clang 命令\n  - 编译需要的framework\n  - 编译xib\n  - 拷贝 xib ，资源文件\n  - 编译ImageAssets\n  - 处理info.plist\n  - 执行cocoapod脚本\n  - 拷贝标准库\n  - 创建 .app 文件和签名\n  \n### LLVM的相关资料\n  - LLVM Cookbook中文版(电子书)\n  - Getting Started with LLVM Core Libraries(电子书)\n  - [官方网站](http://llvm.org/ \"title\")\n  - [开源代码](https://github.com/llvm-mirror/llvm \"title\")\n  - https://github.com/loarabia/Clang-tutorial\n  - http://blog.llvm.org/\n  - https://github.com/xiehuc/llvm-pred/wiki/cookbook"
+    }
+  ]
+}

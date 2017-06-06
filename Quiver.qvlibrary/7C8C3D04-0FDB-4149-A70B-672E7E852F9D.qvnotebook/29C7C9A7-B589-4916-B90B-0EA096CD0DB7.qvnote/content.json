@@ -3,7 +3,7 @@
   "cells": [
     {
       "type": "markdown",
-      "data": "# UIEvent\n## 视图没有响应的情况总结\n- 1. userInteractionEnabled=NO；\n- 2. hidden = YES;\n- 3. alpha <= 0.01\n- 4. 没有实现touchesBegan:withEvent:方法，直接执行touchesMove:withEvent:等方法；\n- 5. 目标视图点击区域不在父视图的Frame上 (superView背景色为clear Color的时候经常会忽略这个问题\n\n## Hit-Test 机制\n- 当用户触摸屏幕进行交互时，系统首先要找到响应者(Responder)。系统检测到手指操作时，将touch 以event的方式加入到UIApplication事件队列中。UIApplication事件队列中取出最新的触摸事件进行分发传递到window进行处理。UIWindow会通过hitTest方法寻找触碰点所在的视图。\nhitTest的顺序如下:\nUIApplication ->UIWindow->Root View-->...-->subview\n事件的分发传递是自下而上的\n\n## 响应者链(responder chain)\n- 响应者的处理传递是自上而下的。touch后系统通过hit test机制找到触摸到的view,但是view并没有或者无法正常通过此次touch。这个事件，系统便会通过响应者寻找下一个响应者。\n- 响应者的顺序如下：\n- 点击view-->view controller(如果存在)->superview->...->UIWindow-->UIApplication。\n\n## hitest底层实现\n- 判断是否事件是否在view上"
+      "data": "## 响应者的事件\n1. 已UIResponse作为超类的任何类都是响应者，比如UIView。\n2. 如果第一个响应者不处理某个特殊事件(如某个手势)，那么他将该事件传递给响应者链的下一级。\n\n# UIEvent\n## 视图没有响应的情况总结\n- 1. userInteractionEnabled=NO；\n- 2. hidden = YES;\n- 3. alpha <= 0.01\n- 4. 没有实现touchesBegan:withEvent:方法，直接执行touchesMove:withEvent:等方法；\n- 5. 目标视图点击区域不在父视图的Frame上 (superView背景色为clear Color的时候经常会忽略这个问题\n\n## Hit-Test 机制\n- 当用户触摸屏幕进行交互时，系统首先要找到响应者(Responder)。系统检测到手指操作时，将touch 以event的方式加入到UIApplication事件队列中。UIApplication事件队列中取出最新的触摸事件进行分发传递到window进行处理。UIWindow会通过hitTest方法寻找触碰点所在的视图。\nhitTest的顺序如下:\nUIApplication ->UIWindow->Root View-->...-->subview\n事件的分发传递是自下而上的\n\n## 响应者链(responder chain)\n- 响应者的处理传递是自上而下的。touch后系统通过hit test机制找到触摸到的view,但是view并没有或者无法正常通过此次touch。这个事件，系统便会通过响应者寻找下一个响应者。\n- 响应者的顺序如下：\n- 点击view-->view controller(如果存在)->superview->...->UIWindow-->UIApplication。\n\n## hitest底层实现\n- 判断是否事件是否在view上"
     },
     {
       "type": "code",

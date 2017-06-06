@@ -1,0 +1,9 @@
+{
+  "title": "carthage的学习笔记",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "1. carthage跟cocoapod一样，可以对一个项目添加一个第三方库和依赖，不同的是carthage是不会创建workspace的，只能添加****.framework的方式来添加依赖\n\n## 用户\n1. 在终端vi Cartfile，编辑那个第三方库，比如: github \"Alamofire/Alamofire\"                ~> 4.0\n2. 执行命令carthage update,这个命令会做两件事:1.执行carthage chkout 下载第三方库到Carthage/Checkouts/中 2. carthage build依次编译第三方库，把生成的库文件.framework拷贝到Carthage/Build中\n\n## 遇到的文件\n1. carthage update有时候clone不下第三方库，网络太慢或者git的版本不对，这个时间就要更改版本，或者改成\"master\"版本\n2. 可以去github上面clone一个版本，到checkout中，再执行carthage build也会生成framework。\n3. 也可以到github直接下载framework文件拷贝到Carthage/Build中，再编译工程"
+    }
+  ]
+}

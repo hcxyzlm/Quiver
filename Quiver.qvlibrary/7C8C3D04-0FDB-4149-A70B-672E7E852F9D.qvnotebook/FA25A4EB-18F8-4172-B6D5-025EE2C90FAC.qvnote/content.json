@@ -1,0 +1,9 @@
+{
+  "title": "coretext的学习",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "##ctcoretext的可以实现图片和文字的混排\n\n### 绘制文字\n1. 继承UIView，重写drawRect方法\n\n```objc\n- (void)drawRect:(CGRect)rect {\n    // Drawing code\n    \n    [super drawRect:rect];\n    \n    // 取得当前画布上下文\n    CGContextRef context = UIGraphicsGetCurrentContext();\n    \n    // 将坐标系上下翻转。对应底层的绘制来说，屏幕的做左下角是(0,0)坐标，而对于上层的uikit来说，左上角是(0,0)，\n    //所以为了之后的坐标按照uikit来做，将这里做坐标的上下翻转，就会跟uikit重合坐标。\n    CGContextSetTextMatrix(context, CGAffineTransformIdentity);\n    CGContextTranslateCTM(context, 0, self.bounds.size.height);\n    CGContextScaleCTM(context, 1.0, -1.0); // 坐标相反，所以要取反\n    \n    // 绘制路径\n    CGMutablePathRef path = CGPathCreateMutable();\n    CGPathAddRect(path, NULL, self.bounds);\n    \n    // 创建富文本\n    NSAttributedString *string = [[NSAttributedString alloc] initWithString:@\"HELLO,WORLD!\"];\n    \n    CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)string);\n    // 创建画文字的框\n    CTFrameRef frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, string.length), path, NULL);\n    \n    // 画文字\n    \n    CTFrameDraw(frame, context);\n    \n    // 释放资源\n    CFRelease(frame);\n    CFRelease(framesetter);\n    CFRelease(path);\n}\n```\n\n### 富文本拆分功能(拆分4个类)\n1. config类，用于配置绘制的参数，例如文字颜色，大小，行间距等\n2. parser类，用于生成绘制界面需要的CTFrameRef实例\n3. coretextdata类，用于保存由parser类生成的cfframeref实例，以及cfframeref实际绘制需要的高度\n4. CTDisplayView类，持有coretextdata类的实例，负责将cfframeref绘制到界面上\n\n### cframe\n1. cframe又多个cfline组成，cfline代表一行的文字显示。\n2. ctline又多个ctrun来组成，ctrun表示一组相同风格的文本。\n3. 可以设置ctrun的__CTRunDelegate来指定在绘制时的高度，宽度，排列对齐等信息。\n\n## ctrundelegate\n1. CTRunDelegateGetRefCon 获取设置ctrundelegate某个标签，用来标示\n2. double CTRunGetTypographicBounds 获取某个ctrun所需的外框\n\n"
+    }
+  ]
+}

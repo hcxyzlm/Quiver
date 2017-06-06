@@ -1,0 +1,9 @@
+{
+  "title": "归档和解码",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "## 对象的序列化\n1. 一个类的成员变量可以像存储在硬盘中，也可以从硬盘从解码出来。\n\n### 实现步骤\n1. 遵守nscopying的协议\n```objct\n- (void)encodeWithCoder:(NSCoder *)aCoder {\n    [aCoder encodeObject:_name forKey:@\"name\"];\n    [aCoder encodeInt:_age forKey:@\"age\"];\n    [aCoder encodeObject:_birthday forKey:@\"birthday\"];\n}\n- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder {\n    if (self = [super init]) {\n        self.name = [aDecoder decodeObjectForKey:@\"name\"];\n        self.age = [[aDecoder decodeObjectForKey:@\"age\"] integerValue];\n        self.birthday = [aDecoder decodeObjectForKey:@\"birthday\"];\n    }\n    return self;\n}\n\n      testObject *object = [[testObject alloc] init];\n        object.name = @\"zhuoLimin\";\n        object.age = 15;\n        object.birthday = @\"515151\";\n        \n        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:object];\n        \n        NSUserDefaults *userDetaults = [NSUserDefaults standardUserDefaults];\n        [userDetaults setObject:data forKey:@\"myInfo\"];\n        [userDetaults synchronize];\n        \n        // 序列化\n        \n        // 解码\n        NSData *Data = [[NSUserDefaults standardUserDefaults] objectForKey:@\"myInfo\"];\n        testObject *model  = [NSKeyedUnarchiver unarchiveObjectWithData:Data];\n```"
+    }
+  ]
+}

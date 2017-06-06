@@ -1,0 +1,9 @@
+{
+  "title": "swift语法总结",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "## get/setter方法\n```objc\nstruct Rect {\n    var origin = Point()\n    var size = Size()\n    var center: Point {\n        get {\n            let centerX = origin.x + (size.width / 2)\n            let centerY = origin.y + (size.height / 2)\n            return Point(x: centerX, y: centerY)\n        }\n        set(newCenter) {\n            origin.x = newCenter.x - (size.width / 2)\n            origin.y = newCenter.y - (size.height / 2)\n        }\n    }\n}\n```\n\n## kvo观察属性\n会以oldValue为默认参数传递\n```objc\nclass StepCounter {\n    var totalSteps: Int = 0 {\n        willSet(newTotalSteps) {\n            print(\"About to set totalSteps to \\(newTotalSteps)\")\n        }\n        didSet {\n            if totalSteps > oldValue  {\n                print(\"Added \\(totalSteps - oldValue) steps\")\n            }\n        }\n    }\n}\n```\n\n## 全局变量和局部变量\n全局的常量或变量都是延迟计算的，不用设置lazy修饰符，但都是延迟加载。\n局部变量或常量从不延迟计算\n"
+    }
+  ]
+}

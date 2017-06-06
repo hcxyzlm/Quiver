@@ -1,0 +1,9 @@
+{
+  "title": "付费",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "### 疑问点\n1. 使用html格式传输富文本\n  ```\n  <p>This project aims to duplicate the methods <u>present on Mac OSX</u> which allow creation of <font face=\"Courier\" color=\"blue\">NSAttributedString</font> from HTML code.\nThis is useful for drawing simple rich text - like this document - without having to use a UIWebView.</p>\n<p><img src=\"http://ww1.sinaimg.cn/large/6aee7dbbgw1effcq2gx92j210j0ustj7.jpg\" width=\"375\" height=\"200\"></p>\n<li>Hyperlinks <b>A</b> (<a href=\"http://www.cocoanetics.com\">Formatting</a> only, clickable as custom view)</li>\n  ```\n2. 用户是节目上传者，是后台做还是前端做\n3. 如果用户是上传者，付费节目是展示未购还是免费图标\n4. 互动通知栏没有打赏怎么展示"
+    }
+  ]
+}

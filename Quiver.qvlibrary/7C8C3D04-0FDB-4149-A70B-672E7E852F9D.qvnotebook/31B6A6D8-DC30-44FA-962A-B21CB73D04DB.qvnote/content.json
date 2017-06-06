@@ -1,0 +1,9 @@
+{
+  "title": "视频播放",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "## 使用AVPlayer播放视频\n1. 播放或者本地适配\n2. 使用AVPlayerLayer做适配播放的界面\n```objc\n- (AVPlayer *)player {\n    if (!_player) {\n        // url的构造\n        NSURL *url = [NSURL URLWithString:@\"http://v1.mukewang.com/a45016f4-08d6-4277-abe6-bcfd5244c201/L.mp4\"];\n        \n        // 创建avplayer item\n        AVPlayerItem *playItem = [[AVPlayerItem alloc] initWithURL:url];\n        _player = [AVPlayer playerWithPlayerItem:playItem];\n        \n        // 添加播放器界面\n        AVPlayerLayer *layer = [AVPlayerLayer playerLayerWithPlayer:_player];\n        layer.frame = self.view.bounds;\n        [self.view.layer addSublayer:layer];\n    }\n    \n    return _player;\n}\n```\n\n## 使用MPMoviePlayerController框架播放，ios9.0已经被废弃了，改用AVPlayerViewController\n```objc\n- (void)mpMediaPlayer {\n    \n    NSURL *url = [NSURL URLWithString:@\"http://v1.mukewang.com/a45016f4-08d6-4277-abe6-bcfd5244c201/L.mp4\"];\n    \n    // 初始化\n   _moviePlayer  = [[MPMoviePlayerController alloc] initWithContentURL:url];\n    [self.view addSubview:_moviePlayer.view];\n    \n    [_moviePlayer play];  // 播放\n    \n    // 设置全屏\n    [_moviePlayer setFullscreen:YES animated:YES];\n}\n```"
+    }
+  ]
+}

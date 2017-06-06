@@ -1,0 +1,9 @@
+{
+  "title": "NSOobject 的load 和 initialize",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "### ＋load\n1.load方法是调用时机是类被加载到系统中就会调用(initialize用到才会调用)\n2.调用在main方法之前\n3.初始化顺序:自身load-->分类的load-->构造方法\n4.调用时没有autorelease pool\n5.一般用于实现黑魔法 Swizzle\n\n### + initialize方法\n1.在main方法之后调用，而且需要用到这个类才会调用，相当于懒加载\n2.initialize方法在一个比较安全的环境中调用，比+load更适合放入初始化代码\n3.跟load方法相似，会先发送父类的init方法，如果子类没有实现该方法，会先调用父类\n4.一般用于初始化"
+    }
+  ]
+}
