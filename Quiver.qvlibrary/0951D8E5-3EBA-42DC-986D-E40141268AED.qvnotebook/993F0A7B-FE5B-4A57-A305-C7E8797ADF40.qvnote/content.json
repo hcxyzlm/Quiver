@@ -1,0 +1,9 @@
+{
+  "title": "day01",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "### 学习资料\n\n1\\. 官方网站 <http://reactnative.cn/>\n\n2\\. 小马哥博客 [http://www.jian22shu.com/c/5f409708aca0](http://www.jianshu.com/c/5f409708aca0)\n\n3\\. node环境作用，需要服务器，用node来做服务器\n\n### 相关命令\n\n1.react-native init\n\n 1) 创建ios/android 工程，对应的js文件\n\n 2）下载第三方框架\n\n2.react-native run-ios 编译运行项目\n\n\n### 第一个react-native工程分析工程\n1. 编写代码编写bian'\n```js\n\n```"
+    }
+  ]
+}
