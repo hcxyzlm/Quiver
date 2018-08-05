@@ -26,7 +26,7 @@
     {
       "type": "code",
       "language": "objectivec",
-      "data": "id object1 = @\"dog\";\nid object2 = nil;\nid object3 = @\"cat\";\nNSArray *array = [[NSArray alloc] initWithObjects:object1,object2, object3,nil]; /**只有一个dog,因为object2是nil,结束了数组的创建*/\nNSArray *array1 = @[object1, object2, object3];\n//抛出异常"
+      "data": "id object1 = @\"dog\";\nid object2 = nil;\nid object3 = @\"cat\";\nNSArray *array = [[NSArray alloc] initWithObjects:object1,object2, object3,nil]; /**只有一个dog,因为object2是nil,结束了数组的创建*/\nNSArray *array1 = @[object1, object2, object3];\n// 所以用第一种方式并不会发生crash,并成功创建了数组，但是得到的数组只有一个obje1的元素\n//抛出异常"
     },
     {
       "type": "markdown",
@@ -48,7 +48,11 @@
     },
     {
       "type": "markdown",
-      "data": "- 要点:\n- 1.应该通过下标操作来访问数组的下标或字典中的键所对应的元素\n- 2.使用字面值创建数组或者字典时，若值有Nil时，会抛出异常。\n\n## 第四条\n- 使用常量来代替#define 宏\n- 在实现文件中使用static const来定义”只在编译单元内可见的常量\"\n\n\n"
+      "data": "- 要点:\n- 1.应该通过下标操作来访问数组的下标或字典中的键所对应的元素\n- 2.使用字面值创建数组或者字典时，若值有Nil时，会抛出异常。\n\n## 第四条\n- 使用常量来代替#define 宏\n- 在实现文件中使用static const来定义”只在编译单元内可见的常量\"\n\n## 第五条\n在处理枚举类型的swith分支中不要有default的分支。这样的话，加入新枚举的之后，编译器会提示开发者，switch语句未处理所有的枚举\n\n\n## 第六条\n属性的读取和设置方法注意，当在对象内部读取数据时，应当使用实例变量来读，比如:_age。而设置数据时，则通过属性来写，比如：self.age = 5\n在初始化及dealloc方法中,总是要直接通过实例变量来读写数据\n\n## 第十一条\n当我们调用某个方法时，其实是会转化为c语言的objc_msgSend的消息传递。其原型如下,objc_msgSend(id self, SEL cmd,...)\nself 叫做接受者，cmd实际为函数本身，叫做选择子。\n\nint returnValue = [someObject messageName:name];转化为 int returnValue = objc_msgSend(someObject,@select(messageName:),name);\n接受者本身会实现一个方法映射表，来缓存最近访问的方法。提高效率\n\n### 第十二条 理解消息转发机制\n消息转发机制流程如下：\n当对象无法影响某个选择子，则进入消息转发机制\n![WX20180518-105822@2x.png](quiver-image-url/37AED0C185B30AB1994D415B4F26E81F.png =977x459)\n\n### 第十三条 不要滥用swizzle，有可能会让程序维护变得更加困难\n```objc\nMethod origMethod = class_getInstanceMethod(self, origSel_);\nclass_addMethod(self,\n                    altSel_,\n                    class_getMethodImplementation(self, altSel_),\n                    method_getTypeEncoding(altMethod));\n method_exchangeImplementations(class_getInstanceMethod(self, origSel_), class_getInstanceMethod(self, altSel_));\n```\nMethodSwizzling泛滥下的隐患\n1. 只有在+load方法中执行swizzle才是安全的\n2. 被hook的方法必须是当前类自身的方法，如果把继承来的imp copy到自身会存在问题。父类的方法应该调用使用，而不是 swizzling 的时候 copy 到子类。比如，同时对NSArray和NSMutableArray的objectAtIndex:的方法都进行了swizzle，会有可能会导致NSArray中的swizzle不执行。因为swizzle会被执行多次，结果可能是未交换之前的状态。正确的是做饭是使用swizzle的方法中dispatch_once，或者不要对继承的方法做swizzle\n3. swizzle的方法，不能跟系统的重名\n\n使用的swizzle的场景:\n1.统计埋点，用户足迹等。hook viewWillAppear:方法，来做用户足迹上传\n2.实现aop\n3.  实现异常保护，比如NSArray的数组越界情况。苹果api没有对异常保护。常见的做法是对数组添加分类，增加这些异常保护方法，但是原来api会替换成你的分类api，效率会非常低。这里可以使用swizzle来做\n\n### 第十六条，初始化方法\n1. 如果有多个初始化方法，应该提供一个全能的初始化方法，其他的初始化方法调用全能初始化方法\n\n### 第十七条，为类编写description方法，提供更有效的调试信息\n\n### 第二十条,为私有方法添加前缀+_methodName。\n\n### 第二十一条，使用分类管理一个类的多份代码，减少大的类\n\n### 第三十八条 block 的语法为， returntype (^blockName)(paramenters)\n\n### 当有复杂的语法定义时，使用typedef重定义，让程序可读性更强，比如block可以使用typedef\n\n\n\n\n\n\n"
+    },
+    {
+      "type": "text",
+      "data": ""
     }
   ]
 }

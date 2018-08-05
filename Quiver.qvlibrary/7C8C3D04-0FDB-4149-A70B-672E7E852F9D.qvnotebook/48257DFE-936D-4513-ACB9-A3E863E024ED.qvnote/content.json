@@ -3,7 +3,7 @@
   "cells": [
     {
       "type": "markdown",
-      "data": "### ＋load\n1.load方法是调用时机是类被加载到系统中就会调用(initialize用到才会调用)\n2.调用在main方法之前\n3.初始化顺序:自身load-->分类的load-->构造方法\n4.调用时没有autorelease pool\n5.一般用于实现黑魔法 Swizzle\n\n### + initialize方法\n1.在main方法之后调用，而且需要用到这个类才会调用，相当于懒加载\n2.initialize方法在一个比较安全的环境中调用，比+load更适合放入初始化代码\n3.跟load方法相似，会先发送父类的init方法，如果子类没有实现该方法，会先调用父类\n4.一般用于初始化"
+      "data": "### ＋load\n1.load方法是调用时机是类被加载到系统中就会调用(initialize用到才会调用)\n2.调用在main方法之前\n3.初始化顺序:自身load-->分类的load-->构造方法\n4.调用时没有autorelease pool\n5.一般用于实现黑魔法 Swizzle\n\n### + initialize方法\n1.在main方法之后调用，而且需要用到这个类才会调用，相当于懒加载\n2.initialize方法在一个比较安全的环境中调用，比+load更适合放入初始化代码\n3.跟load方法相似，会先发送父类的init方法，如果子类没有实现该方法，会先调用父类\n4.一般用于初始化\n5. 一个类只会调用一次initialize方法，调用时机只会在向对象发送消息，并且在类的缓存中没有找到消息的选择子时才会调用。alloc 的调用会导致了调用该方法\n\n### 总结\n到这里，我们对 initialize 方法的研究基本上已经结束了，这里会总结一下关于其方法的特性：\n\ninitialize 的调用是惰性的，它会在第一次调用当前类的方法时被调用\n与 load 不同，initialize 方法调用时，所有的类都已经加载到了内存中\ninitialize 的运行是线程安全的\n子类会继承父类的 initialize 方法\n而其作用也非常局限，一般我们只会在 initialize 方法中进行一些常量的初始化。\n"
     }
   ]
 }

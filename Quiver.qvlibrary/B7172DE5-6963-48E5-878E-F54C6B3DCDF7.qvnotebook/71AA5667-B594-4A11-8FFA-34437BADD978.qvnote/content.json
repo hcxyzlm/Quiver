@@ -1,0 +1,9 @@
+{
+  "title": "ios框架分析",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "## viper\n- viper，分别有view, Interactor，present,entity,router组成\n\n## view(view/vc组成)\n- view可以是由view+uiviewcontroller组成，也可以是customview。\n\n### view的职责\n- 展示ui\n- 对外暴露各种用于更新ui的接口，自己不主动更新ui\n- view持有外部注入一个eventhandler对象，将view层的事件发送给eventhandler\n- view持有一个外部一个datasource对象，在渲染过程中，会将datasource获取用于展示的数据。datasource应该尽量和具体业务无关\n- view想presenter提供routesource，用于界面跳转\n\n### preseonter的职责(又view持有)\n- 接收并处理来自view的事件\n- 维护和view的各种相关配置，比如界面是否使用夜间模式\n- 调用interface提供 use case 执行业务逻辑\n- 向interface提供view中的数据，让interface生成需要model\n- 通知view进行操作\n\n### Interactor(交互器)\n- 实现和封装各种业务各种use case, 供外部使用\n- 维护和业务相关各种状态，比如是否正在编辑笔记\n- Interactor可以获取各种manager和server\n- 通过dadamanager维护model\n- Interactor持有一个外部注入的eventhandler对象。通过eventhandler对象对某些数据操作过程进行回调。\n- 持有一个又外部注入的datasource对象，用于操作view上的数据，更新model\n- interactor是业务的实现和维护者，他会调用各种server来实现业务逻辑\n\n### entity(实体)\n- 表示我们的view绑定的model\n\n### router\n- 可以简单封装uikit的哪些跳转方法。也可以用route url来执行路由\n\n\n## 实践\n### 从mvc重构到viper的方案\n1. 整理vc的代码，把不能指责的代码用pramark mark 分隔好\n2. 整理好，按照各种部分的指责，将代码分散到viper到各种角色中，此时view,presenter，interactor之间可以相互引用。\n3. 把View、Presenter、Interactor进行解耦，抽出接口，互相之间依赖接口进行交互\n\n\n\n"
+    }
+  ]
+}

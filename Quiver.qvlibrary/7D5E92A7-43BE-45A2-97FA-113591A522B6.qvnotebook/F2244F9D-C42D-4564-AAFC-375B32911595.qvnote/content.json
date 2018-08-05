@@ -1,0 +1,9 @@
+{
+  "title": "block面试",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "什么是block?\n1. block是将函数及其执行上下文封装起来的对象\n2. block调用即是函数调用\n3. block会截获对象和变量\n\n### 命令行查看源码方式\n```objc\nclang -rewrite-objc -fobjc-arc LMBlcok.m\n```\n\n### 截获变量方式\n1.静态局部变量，以指针的形式获取\n2.局部变量，基本数据类型，复制值。对象类型，对于对象的局部变量连同所有权修饰符一起获取，比如 __unsafe_unretained id unsafe_obj;\n  __strong id strong_obj;\n3. 静态全局变量，不获取\n4. 全局变量，不截获\n\n### __block修饰符\n1. 一般情况下，对于截获变量进行赋值操作，需要添加__block修饰符。\n2. 静态局部变量，静态全局变量，全局变量不需要添加__block\n3. 局部变量需要__block\n4. __block修饰的变量变成了对象\n5. __block变量的位置，栈：__forwarding指向自身。\n\n### __block修饰符在mrc/arc的作用\n1.MRC下__block修饰的变量，并不改变引用计数,同时block内部并不对引入的外部对象，更改引用计数。\n2.但是ARC下block会被修改为__NSMallocBlock__ ,同时引用计数增加了。\n\n## block的内存管理\n### block 的copy操作\n1. __NSConcreteStackBlock copy由栈变成堆\n2. _NSConcreteMallocBlock copy什么也不做\n3. _NSConcreteMallocBlock存储在堆区，增加引用计数。\n\n\n### 面试题\n![IMAGE](quiver-image-url/5A2FF0323374E2B09F7DC031D39BC562.jpg =1334x750)\n![IMAGE](quiver-image-url/1D2C3057F5C7132340BA1314FFB15FDF.jpg =1334x750)\n\n![IMAGE](quiver-image-url/8760F813B4E1B62143984591833C0B34.jpg =1334x750)\n解答： 在mrc下，不会产生内存泄露。在arc下，会产生内存泄露。MRC下__block修饰的变量，并不改变引用计数,同时block内部并不对引入的外部对象，更改引用计数。但是ARC下block会被修改为__NSMallocBlock__ ,同时引用计数增加了。\n![IMAGE](quiver-image-url/F1C40867F0F1E36EAB9646299524796E.jpg =1334x750)\n\n\n\n\n"
+    }
+  ]
+}

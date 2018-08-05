@@ -26,7 +26,7 @@
     {
       "type": "code",
       "language": "objectivec",
-      "data": "@implementation ZLMDeals\n+(instancetype)dealsWithDict:(NSDictionary *)dict {\n    ZLMDeals *deal = [[self alloc] init];\n    [deal setValuesForKeysWithDictionary:dict];\n    deal.check = NO;\n    return deal;\n}\n@end\n ```\n - 实现原理:\n    - 用字典来转模型,会遍历字典中的所有key,就会去模型中查找setName这个方法(这里假设key是name),有则调用。没有就会去模型中有没有_name这个属性，有就会_name = value\n    - 都没有找到就会报错\n\n## 注意点\n1. 字典转模型，当字典的key在模型找不到会报错，解决方法:\n2. 重写 (void)setValue:(id)value forUndefinedKey:(NSString *)key方法，过滤掉。\n\n\n"
+      "data": "@implementation ZLMDeals\n+(instancetype)dealsWithDict:(NSDictionary *)dict {\n    ZLMDeals *deal = [[self alloc] init];\n    [deal setValuesForKeysWithDictionary:dict];\n    deal.check = NO;\n    return deal;\n}\n@end\n ```\n - 实现原理:\n    - 用字典来转模型,会遍历字典中的所有key,就会去模型中查找setName这个方法(这里假设key是name),有则调用。没有就会去模型中有没有_name这个属性，有就会_name = value\n    - 都没有找到就会报错\n\n## 注意点\n1. 字典转模型，当字典的key在模型找不到会报错，解决方法:\n2. 重写 (void)setValue:(id)value forUndefinedKey:(NSString *)key方法，过滤掉。\n\n## kvo实现原理\n1. 当调用addObserver后，监听者的observer会动态生成NSKVONotifying_class的子类，继承自observer的实例类\n2. NSKVONotifying_clas重写了setter方法,setter的方法具体实现\n```objc\n- (void)setvalue:(id)objc {\n\n  [self willChangeValueForKey:@\"keypath\"];   // 回调观察者\n  // 调用原类实现\n  [super setvalue:obj];\n  [self didChangeValueForKey:@\"keypath\"];\n}\n```\n\n\n"
     }
   ]
 }

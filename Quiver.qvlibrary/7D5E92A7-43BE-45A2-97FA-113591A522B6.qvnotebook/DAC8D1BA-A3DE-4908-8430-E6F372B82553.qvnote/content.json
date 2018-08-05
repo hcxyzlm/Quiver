@@ -1,0 +1,9 @@
+{
+  "title": "复杂页面架构",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "### 微博app的正文页\n  - 整体架构\n  - 数据流\n  - 反向更新\n  \n### 整体架构\n  - view +vc + viewmodel + engine + model\n  - viewmodel + engine 桥接模式\n  - view 控件初始化，设置数据，交互时间处理\n  - vc 视图创建，组合，协调逻辑，事件回调处理\n  - 业务逻辑层（viewmodel），业务逻辑处理，预排版，数据增删改查封装者，线程安全处理\n  - 数据层(engine + model) 网络请求，网络解析，增删改查，本地处理逻辑(对server的适配)\n\n### 数据流\n1. 网络数据(一级评论，二级评论，广告，推荐等其他数据)\n2. 业务数据 (id data, int type)\n3. ui数据(viewmodel), imageobj, labelobj(frame, value)\n\n### 复杂页面框架总结\n1. mvvm框架思想\n2. reactNative的数据流思想\n3. 系统UIView更新机制的思想\n4. facebook开源框架asyncDisplaykit关于预排版的设计思想\n\n\n### mvvm\n  - viewmodel + view + model\n\n\n"
+    }
+  ]
+}

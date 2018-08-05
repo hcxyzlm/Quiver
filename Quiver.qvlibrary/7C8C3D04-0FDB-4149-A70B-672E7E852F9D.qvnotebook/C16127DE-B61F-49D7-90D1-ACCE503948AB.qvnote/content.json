@@ -98,7 +98,7 @@
     {
       "type": "code",
       "language": "objectivec",
-      "data": "d   ispatch_queue_t queue =  dispatch_queue_create(\"download\", DISPATCH_QUEUE_CONCURRENT);\n    // 异步步务, 跟主线程异步执行\n    dispatch_async(queue, ^{\n\n        NSLog(@\"dispatch_async\");\n        NSLog(@\"current thread %@\", [NSThread currentThread]);\n        NSURL* url = [NSURL URLWithString:@\"http://tupian.enterdesk.com/2013/mxy/12/10/15/3.jpg\"];\n        NSData* data = [NSData dataWithContentsOfURL:url];\n        UIImage* img = [UIImage imageWithData:data];\n\n        // 回到主线程, dispatch_sync也可以\n        dispatch_async(dispatch_get_main_queue(), ^{\n            self.m_imageview.image = img;\n\n        });\n    });"
+      "data": "dispatch_queue_t queue =  dispatch_queue_create(\"download\", DISPATCH_QUEUE_CONCURRENT);\n    // 异步步务, 跟主线程异步执行\n    dispatch_async(queue, ^{\n\n        NSLog(@\"dispatch_async\");\n        NSLog(@\"current thread %@\", [NSThread currentThread]);\n        NSURL* url = [NSURL URLWithString:@\"http://tupian.enterdesk.com/2013/mxy/12/10/15/3.jpg\"];\n        NSData* data = [NSData dataWithContentsOfURL:url];\n        UIImage* img = [UIImage imageWithData:data];\n\n        // 回到主线程, dispatch_sync也可以\n        dispatch_async(dispatch_get_main_queue(), ^{\n            self.m_imageview.image = img;\n\n        });\n    });"
     },
     {
       "type": "markdown",
@@ -107,16 +107,16 @@
     {
       "type": "code",
       "language": "objectivec",
-      "data": "void dispatch_barrier_sync(dispatch_queue_t queue,dispatch_block_t block);\n//在前面的任务执行完他才执行，而且在他后面的任务等他执行才执行\n\n void dispatch_after( dispatch_time_twhen, dispatch_queue_t queue,dispatch_block_t block);\n// 多少时间后任务执行，同步还是异步执行取决你传入的队列\n\n + (NSTimer *)scheduledTimerWithTimeInterval:(NSTimeInterval)seconds invocation:(NSInvocation *)invocation repeats:(BOOL)repeats\n//开辟一个时钟，在多少秒后执行，主要不要在时钟做耗时操作，是在UI线程中执行\n延迟执行"
+      "data": "void dispatch_barrier_sync(dispatch_queue_t queue,dispatch_block_t block);\ndispatch_barrier_sync:使用串行执行的方法，等待前面的任务执行完才执行，而且后面的任务要等待他结束，一般配合跟自定义并发队列，不能和系统并发任务配合\n//在前面的任务执行完他才执行，而且在他后面的任务等他执行才执行\n\n void dispatch_after( dispatch_time_twhen, dispatch_queue_t queue,dispatch_block_t block);\n// 多少时间后任务执行，同步还是异步执行取决你传入的队列\n\n + (NSTimer *)scheduledTimerWithTimeInterval:(NSTimeInterval)seconds invocation:(NSInvocation *)invocation repeats:(BOOL)repeats\n//开辟一个时钟，在多少秒后执行，主要不要在时钟做耗时操作，是在UI线程中执行\n延迟执行"
     },
     {
       "type": "markdown",
-      "data": "\n### Dispatch Group\n1. 可以把多个任务并发执行，多个任务并发执行结束就会再往下执行，多个任务的执行顺序不一致。\n2. 应用场景：如果有用户希望获取图片还有用户信息后才往下执行，获取图片开辟一个线程，用户信息一个线程。"
+      "data": "\n### Dispatch Group + enter\n1. 可以把多个任务并发执行，多个任务并发执行结束就会再往下执行，多个任务的执行顺序不一致。\n2. 应用场景：如果有用户希望获取图片还有用户信息后才往下执行，获取图片开辟一个线程，用户信息一个线程。"
     },
     {
       "type": "code",
       "language": "objectivec",
-      "data": "dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0); // 获取全局并发队列\n// 创建group组\n    dispatch_group_t group = dispatch_group_create();\n    // 异步函数\n    dispatch_group_async(group, queue, ^{\n        NSLog(@\"block1, current thread = %@\", [NSThread currentThread]);\n    });\n    dispatch_group_async(group, queue, ^{\n        NSLog(@\"block2, current thread = %@\", [NSThread currentThread]);\n    });\n    dispatch_group_async(group, queue, ^{\n        NSLog(@\"block3  , current thread = %@\", [NSThread currentThread]);\n    });\n\n    dispatch_group_notify(group, queue, ^{\n        NSLog(@\"done, current thread = %@\", [NSThread currentThread]);\n    });\n// 结果: block1,block2,block3三个顺序不确定，done是最后输出"
+      "data": "dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0); // 获取全局并发队列\n// 创建group组\n    dispatch_group_t group = dispatch_group_create();\n    // 异步函数\n    dispatch_group_enter(downloadGroup);\n    dispatch_group_async(group, queue, ^{\n        NSLog(@\"block1, current thread = %@\", [NSThread currentThread]);\n        dispatch_group_leave(downloadGroup);\n    });\n    dispatch_group_enter(downloadGroup);\n    dispatch_group_async(group, queue, ^{\n        NSLog(@\"block2, current thread = %@\", [NSThread currentThread]);\n        dispatch_group_leave(downloadGroup);\n    });\n    dispatch_group_enter(downloadGroup);\n    dispatch_group_async(group, queue, ^{\n        NSLog(@\"block3  , current thread = %@\", [NSThread currentThread]);\n        dispatch_group_leave(downloadGroup);\n    });\n\n    dispatch_group_notify(group, queue, ^{\n        NSLog(@\"done, current thread = %@\", [NSThread currentThread]);\n    });\n// 结果: block1,block2,block3三个顺序不确定，done是最后输出"
     },
     {
       "type": "markdown",

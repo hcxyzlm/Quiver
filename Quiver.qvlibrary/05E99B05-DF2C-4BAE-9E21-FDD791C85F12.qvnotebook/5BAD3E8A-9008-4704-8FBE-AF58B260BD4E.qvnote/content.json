@@ -1,9 +1,0 @@
-{
-  "title": "rmstore支付出现问题",
-  "cells": [
-    {
-      "type": "text",
-      "data": "1. 苹果的bug还是不能支付验证成功<div>2. 优化代码，获取本地appstoreurl</div>"
-    }
-  ]
-}

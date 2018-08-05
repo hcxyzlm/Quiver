@@ -1,0 +1,9 @@
+{
+  "title": "Xcode调试之LLDB",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "## 记载一些有用的lldb命令\n\n### help命令\n1. help 列出所有lldb命令\n2. help <command> 某个命令的详细用法，比如 help print\n\n### print\n1. po(print object)可以打印对象的description方法的结果\n2. 打印不同格式可以用p/x number打印十六进制，p/t number打印二进制，p/c char打印\n\n### expression\n1. expression 可以改变一个值，例如expression s\n2. expression可以使用e来代替\n3. e -p — dataArray 也可以打印对象的description方法的结果，等同于po\n\n### 在调试器中直接更行UI\n1. "
+    }
+  ]
+}

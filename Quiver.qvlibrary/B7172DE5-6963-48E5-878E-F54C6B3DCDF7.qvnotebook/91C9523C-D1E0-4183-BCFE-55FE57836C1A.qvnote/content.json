@@ -1,0 +1,9 @@
+{
+  "title": "NSLock和OSSpinLockLock(自旋锁)的区别",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "NSLock的底层是使用pthread_mutex_t\n```objc\n- (void) lock\n{\n  int err = pthread_mutex_lock(&_mutex);\n  if (EINVAL == err)\n    {\n      [NSException raise: NSLockException\n\t    format: @\"failed to lock mutex\"];\n    }\n  if (EDEADLK == err)\\\n    {\n      _NSLockError(self, _cmd, YES);\n    }\n}\n```\nOSSpinLockLock 底层是使用pthread_spin_lock锁。\n\nOSSpinLockLock不会引起调用者的睡眠，调用者会一直循环在那里等待，等待别的线程释放了锁。\nNSLock如果有别的线程上锁，NSLock会让调用者睡眠。"
+    }
+  ]
+}

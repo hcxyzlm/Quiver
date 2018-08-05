@@ -1,9 +1,0 @@
-{
-  "title": "ios多线程NSOperation",
-  "cells": [
-    {
-      "type": "markdown",
-      "data": "## NSOperation的作用\n1. 配合使用nsoperation和nsoperationqueue也能实现多线程编程\n"
-    }
-  ]
-}

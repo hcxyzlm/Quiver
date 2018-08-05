@@ -1,0 +1,9 @@
+{
+  "title": "引用wcdb框架踩过的坑",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "1. 设置主键递增用raplace会自动替换，不会递增"
+    }
+  ]
+}
