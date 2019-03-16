@@ -1,0 +1,9 @@
+{
+  "title": "swift后台--vapor",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "### 安装vapor\n1. eval \"$(curl -sL check.vapor.sh)\"\n2. brew install vapor/tap/vapor\n注意：如果Your Command Line Tools are too outdated错误，可以到[apple](https://developer.apple.com/download/more/)下载最近的command line tools\n\n## 第一个vapor项目\n### 创建项目\n1. vapor new HelloVapor --api --branch=beta\n\n###生成xcode项目文件\nvapor xcode\n"
+    }
+  ]
+}

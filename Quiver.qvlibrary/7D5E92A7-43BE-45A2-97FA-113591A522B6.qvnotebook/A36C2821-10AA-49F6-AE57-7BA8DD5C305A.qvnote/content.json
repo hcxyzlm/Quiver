@@ -1,0 +1,9 @@
+{
+  "title": "图片缓存框架面试题",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "### 架构\n\n### 整体设计\n![IMAGE](quiver-image-url/E4F4F5BF24AD132A40D3F7ED8BD4853D.jpg =1334x750)\n\n### 流程\n![IMAGE](quiver-image-url/87094DE1B18E4F4D508E94B9FFE0D59E.jpg =1334x750)\n\n### 图片读写\n- 图片通过什么方式进行读写，过程是怎么样？答案：以图片url的单向hash值作为key\n\n### 内存设计\n- 存储的size(队列数据结构存储)\n- 淘汰策略\n\n### 存储size\n![IMAGE](quiver-image-url/EA977CBB651E176AD8B53BF9B01F5112.jpg =1334x750)\n\n### 淘汰策略\n- 以队列先进先出的方式淘汰\n- LRU算法(如30分钟之内是否使用过)，提高检查触发频率(每次读写时，前后台切换)\n- ![IMAGE](quiver-image-url/0AC90AD06C1BFBD5CBD26BA536F3E3B3.jpg =1334x750)\n\n### 磁盘设计\n- 存储方式\n- 大小限制(如100m)\n- 淘汰策略(如一张图片存储时间间距超过7天)\n\n### 网络设计需要考虑哪些问题?\n- 图片请求最大并发量\n- 请求超时策略\n- 请求优先级\n\n### 图片解码\n### 对于不同格式的图片，解码采用什么方式来做？\n- 应用策略模式对不同格式进行解码\n\n### 在哪个阶段做图片处理？\n- 磁盘读取后，网络请求返回后，内存中最好放已经解码的图片\n\n### 线程处理\n- ![IMAGE](quiver-image-url/976155912E0A2E55D87C6CB80C1E462B.jpg =1334x750)\n"
+    }
+  ]
+}

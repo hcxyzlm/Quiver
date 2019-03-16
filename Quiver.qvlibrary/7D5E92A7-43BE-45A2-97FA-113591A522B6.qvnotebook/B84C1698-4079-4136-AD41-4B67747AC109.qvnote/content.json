@@ -1,0 +1,9 @@
+{
+  "title": "设计模式相关面试题",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "## 六大设计原则\n- 单一职责原则\n- 依赖倒置原则\n- 开闭原则\n- 里氏替换原则\n- 接口隔离原则\n- 迪米特法则\n\n### 单一职责原则\n- 一个类只负责一件事（ uiview/calayer）\n\n### 开闭原则\n- 对修改关闭，对扩展开放(不要把私有的数据暴露出去)\n\n### 接口隔离原则\n- 使用多个专门的协议，而不是一个庞大臃肿的协议(比如：tableviw的代理有datasource, delegate两个协议)\n- 协议的方法尽量少\n\n### 依赖倒置原则\n- 抽象不依赖某个具体实现，具体实现可以依赖抽象(数据持久化上次用协议进行隔离，不需要关心底层存储的数据方式)\n\n### 里氏替换原则\n- 父类可以背子类无缝替换，且原来功能不受任何影响(kvo动态新建子类)\n\n### 迪米特法则\n- 一个对象应当对其他对象有尽可能多的了解\n- 高内聚，低耦合\n\n## 责任链(像链表模式)\n![IMAGE](quiver-image-url/B3C755FFEA5B7FF893B36C6E99A1D033.jpg =1334x750)\n![IMAGE](quiver-image-url/40A786FCA597C06C0D754725CF44DB34.jpg =1334x750)\n![IMAGE](quiver-image-url/EAB362845FD559091EDF25E9CA164FE0.jpg =1334x750)\n\n## 桥接\n![IMAGE](quiver-image-url/9AE1BE001061ECFFE9BDDDDB7E6C8F8D.jpg =1334x750)\n![IMAGE](quiver-image-url/AE22861E25AABE810DE5D58388312705.jpg =1334x750)\n\n## 适配器\n- 一个现有类需要适应变化的问题\n- 对象适配器和类适配器\n![IMAGE](quiver-image-url/770F786E42286A031583530DF2260648.jpg =1334x750)\n![IMAGE](quiver-image-url/869B6EFF51EE1032637FC31E9D9C3852.jpg =1334x750)\n\n## 单例\n- 写法\n```objc\n+ (instancetype)instance {\n    static LMInstanceObject *instacne;\n    static dispatch_once_t onceToken;\n    dispatch_once(&onceToken, ^{\n        instacne = [[super allocWithZone:NULL] init];\n    });\n    \n    return instacne;\n}\n\n// 重写该方法，调用alloc会调用改方法\n+ (instancetype)allocWithZone:(struct _NSZone *)zone {\n    return  [self instance];\n}\n\n// 重写方法防止copy\n- (id)copyWithZone:(NSZone *)zone {\n    return  [self.class allocWithZone:zone];\n}\n```\n\n## 命令模式\n- 行为进行参数化\n- 降低代码重合度\n- ![IMAGE](quiver-image-url/E7BE4083F7A43920259A4FB1529A7C6A.jpg =1334x750)\n- ![IMAGE](quiver-image-url/D6DE495BBE682EEF8928F88D6701A390.jpg =1334x750)\n- ![IMAGE](quiver-image-url/F40FFE1A9B1D57FF02F63A343F15F81F.jpg =1334x750)\n\n## 总结\n- 请手写单例实现\n- 你都知道哪些设计原则,请谈谈你的理解\n- ui事件传递机制是怎样实现的？你对其中运用到的设计模式是怎样理解的"
+    }
+  ]
+}

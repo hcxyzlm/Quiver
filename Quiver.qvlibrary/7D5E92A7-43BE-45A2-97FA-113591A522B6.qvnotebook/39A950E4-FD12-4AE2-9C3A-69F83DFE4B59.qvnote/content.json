@@ -1,0 +1,9 @@
+{
+  "title": "客户端整体架构",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "### 整体框架\n![IMAGE](quiver-image-url/A85AD9D6084A4F2E12BF6899D6A2BD4E.jpg =1334x750)\n\n### 业务之间的解耦通信方式\n- OpenURL\n- 依赖注入\n- ![IMAGE](quiver-image-url/B8DFE7AE5ACF14EF82850634412B7A2E.jpg =1334x750)\n\n## 总结\n- 图片缓存\n- 阅读统计时长\n- 复杂页面架构\n- 客户端整体架构(上层依赖下层)"
+    }
+  ]
+}

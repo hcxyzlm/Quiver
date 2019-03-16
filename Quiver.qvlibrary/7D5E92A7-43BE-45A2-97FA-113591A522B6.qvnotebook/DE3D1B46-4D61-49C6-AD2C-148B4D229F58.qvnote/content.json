@@ -1,0 +1,17 @@
+{
+  "title": "第三方库面试题",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "## AFNetwork\n###框架图\n![IMAGE](quiver-image-url/B64F4F16271B22DD632FD453A4673C68.jpg =1334x750)\n![IMAGE](quiver-image-url/202554E2EBBCE473CB6CCB4A26C2B701.jpg =1334x750)\n\n### AFURLSessionManager\n- 创建和管理NSURLSession,NSURLSessionTask\n- 实现NSURLSessionDelegate等协议代理方法\n- 引入AFSecurityPolicy保证请求安全\n- 引入AFNetworkReachabilityManager监控网络状态\n\n### SDWebImage\n- 框架简图\n- ![IMAGE](quiver-image-url/4FDE5EC970C3F3769A426524951276ED.jpg =1334x750)\n\n### 加载图片流程\n- 查找内存缓存->磁盘缓存->网络下载。\n\n### ReactiveCocoa\n- 函数响应式编程框架\n- 信号，订阅\n\n### 信号\n- 信号代表一连串的状态\n- 在信号状态改变时，对应的订阅者RacSubScriber就会收到通知执行的指令\n- ![IMAGE](quiver-image-url/79700A5E1870644BFC689A01FF10380D.jpg =1334x750)\n![IMAGE](quiver-image-url/3B1E58CBA03A3432BBC0784E9540DA73.jpg =1334x750)\n\n### 订阅\n- RACSubscriber\n- ![IMAGE](quiver-image-url/C6EF5979023BE4E76E20627B898408F1.jpg =1334x750)\n- ![IMAGE](quiver-image-url/537B6536B0D199045CB3D670905A88CD.jpg =1334x750)\n\n## AsyncDisplayKit\n- 提高ios界面渲染性能的一个框架\n\n### 基本原理\n- 针对Asnode的修改和提交，会将其封装并提交到一个全局容器中。\n- ASDK也在Runloop中注册一个observer\n- 在runloop进入休眠钱，ASDK执行该loop内提交的所有任务。\n\n### 主要处理问题\n- Layout，视图布局计算，文本宽高计算\n- Rending,文本渲染，图片解码，图形绘制\n- UIKit object, 对象创建，对象调整，对象销毁\n- 减轻主线程的压力，把主线程的部分工作挪到子线程中\n"
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    }
+  ]
+}

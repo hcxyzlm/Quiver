@@ -1,0 +1,9 @@
+{
+  "title": "flutter学习",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "### dart学习\n1. 使用var修饰的变量不能改变类型\n2. 使用dynamic和Object修饰的变量可以改变类型\n3. Object是dart所有对象的根基类，所有的dart的父类都是Object类\n4. final 和const 修饰的变量，类型可以省略"
+    }
+  ]
+}

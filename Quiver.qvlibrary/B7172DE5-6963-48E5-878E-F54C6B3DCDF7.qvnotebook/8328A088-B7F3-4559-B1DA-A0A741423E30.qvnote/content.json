@@ -1,0 +1,9 @@
+{
+  "title": "swift进阶",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "### 使用map, reduce来替代for\n```\n// map\nlet stringArray = [\"Objective-C\", \"Swift\", \"HTML\", \"CSS\", \"JavaScript\"]\n let characters = stringArray.map { (string) -> Int in\n      return string.characters.count\n }\n  print(characters)\n  \n  // [11, 5, 4, 3, 10]\n  \n// reduce\nlet numbers = [1, 2, 3, 4]\n        let numberSum = numbers.reduce(0, { x, y in\n            x + y\n        })\n        print(numberSum)\n        // numberSum == 10\n```\n\n### 除⾮你确实需要，否则不要使⽤ self.。不过在闭包表达式中，self 是被强制使⽤的，这 是⼀个清晰的信号，表明闭包将会捕获 self\n\n### 数组\n  - 迭代数组 for x in array\n  - 想要迭代数组第一个元素其余部分 for x in numbers.dropFirst()\n  - 想要迭代除了最后五个元素以外的数组for x in numbers.dropLast(5)\n  - 迭代数组的下标和元素 for (index, element) in numbers.enumerated()\n  - 想要筛选出符合某个标准的元素？array.ĩlter { someCriteria($0) > }\n  \n### sequeue\n  - map\n```\nfunc map<T>(_ transform:(Element)->T) -> [T] {\n        var result:[T] = [];\n        result.reserveCapacity(count)\n        for elemnet in self {\n            result.append(transform(elemnet))\n        }\n        \n        return result\n    }\n```\n\n// last\n```\nfunc last(where predicate:(Element)->Bool) ->Element? {\n        for element in self.reversed() where predicate(element) {\n            return element\n        }\n        return nil\n    }\n```"
+    }
+  ]
+}

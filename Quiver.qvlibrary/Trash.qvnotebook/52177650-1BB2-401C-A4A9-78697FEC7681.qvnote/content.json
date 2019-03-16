@@ -1,0 +1,9 @@
+{
+  "title": "Resume",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": " <div align=\"center\">\n     <h1>XXX</h1>\n     <div>\n         <span>\n             <img src=\"assets/phone-solid.svg\" width=\"18px\">\n             180XXXXXXXX\n         </span>\n         ·\n         <span>\n             <img src=\"assets/envelope-solid.svg\" width=\"18px\">\n             zhengyc101@163.com\n         </span>\n         ·\n         <span>\n             <img src=\"assets/github-brands.svg\" width=\"18px\">\n             <a href=\"https://github.com/CyC2018\">CyC2018</a>\n         </span>\n         ·\n         <span>\n             <img src=\"assets/rss-solid.svg\" width=\"18px\">\n             <a href=\"#\">My Blog</a>\n         </span>\n     </div>\n </div>\n\n\n ## 个人信息\n\n - 男，1994 年出生\n - 求职意向：Java 研发工程师\n - 工作经验：0 年（校招可不填）\n - 期望薪资：0k（校招可不填）\n\n## 教育经历\n\n- 硕士，XXXX大学，计算机科学与技术专业，2016.9~2019.7\n- 学士，XXXX大学，软件工程专业，2012.9~2016.7\n\n## 工作经历\n\n- XXXX 公司，XXXX 部门，XXXX 工程师，2010.1~2010.9\n\n  负责 XXX\n\n## 项目经历\n\n- XXXX 项目\n\n  使用一两句话描述项目的主要功能，然后介绍自己在项目中的角色，解决了什么问题，使用什么方式解决，比别人的方法相比有什么优势（尽量用数据来说明）。\n\n  项目地址：[CS-Notes](https://github.com/CyC2018/CS-Notes)\n\n## 技能清单\n\n- ★★★ Java\n- ★★☆ C++、Python\n- ★★★ MySQL\n- ★★★ Redis\n- ★★☆ Spring\n- ★☆☆ RabbitMQ、ZooKeeper\n- ★★☆ JavaScript\n"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "title": "swift面试题",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "### public 和 open的区别o\npublic 可以被任何人访问，但是其他module中不可以被override和继承，在自己的module可以override和继承\nopen 可以被任何人访问，包括override和继承\n\n### Self 和 associatedtype的作用\nself: 只能用在类里，作为函数的返回值类型，表示当前类\nassociatedtype: 声明一个协议时，作为关联类型。可以为协议中某个类型提供一个占位名(别名)，其代表的实践类型在协议实现才会被指定\n```swift\nprotocol DataObservableProtocol: FetchDataProtocol {\n    associatedtype DataType\n    var data: DataType { get set }\n    var hasMoreData: Bool { get set }\n}\n\nclass IPADataListViewModel: DataObservableProtocol {\n  typealias DataType = [IPADataModel] \n}\n```\n/// 这里就会实现 DataObservableProtocol执行该类型为[IPADataModel]\n\n### throws 和 rethrows用法和作用\nthrows 用在函数上, 表示这个函数会抛出错误。一种直接使用throw抛出，在 try 和 catch代码块中处理\nrethrows和throws类似，不过只使用于参数中有函数，且函数会抛出的情况\nrethrows可以用throws替代，反过来不行\n\n### try？ 和 try！是什么意思\n这两个都用于处理可抛出异常的函数, 使用这两个关键字可以不用写 do catch\n区别于try?在用于处理函数如果抛出异常，则返回Nil，否则返回函数返回值的可选值\ntry!则在函数抛出异常时会崩溃，否则返回函数的返回值\n\n### map， filter，reduce的作用\nmap 用于映射，可以将一个列表转换成另一个列表\nfilter用于过滤，可以筛选出想要的元素\nreduce用于合并\n\n### map 与 flatmap 的区别\n  flatmap有两个函数实现，一个是中间的函数返回值为一个可选值, 而 flatmap 会丢掉那些返回值为 nil 的值\n例如\n一个是中间的函数, 返回值为一个数组, 而这个 flapmap 返回的对象则是一个与自己元素类型相同的数组\n```swift\nfunc someFunc(_ array:[Int]) -> [Int] {\n    return array\n}\n[[1], [2, 3], [4, 5, 6]].map(someFunc)\n// [[1], [2, 3], [4, 5, 6]]\n[[1], [2, 3], [4, 5, 6]].flatMap(someFunc)\n// [1, 2, 3, 4, 5, 6]\n```\n\n### String 与 NSString 的关系与区别\nNSString 与 String 之间可以随意转换\nString 是结构体, 值类型, NSString 是类, 引用类型\n\n### 什么时候使用 final\nfinal 用于限制继承和重写. 如果只是需要在某一个属性前加一个 final.\n如果需要限制整个类无法被继承, 那么可以在类名之前加一个final"
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    }
+  ]
+}
