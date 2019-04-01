@@ -1,0 +1,9 @@
+{
+  "title": "go 学习过程",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "### 环境搭建\n[go中文网](https://studygolang.com/),  [idea go 插件](http://plugins.jetbrains.com/plugin/)\n推荐使用的IDE: idea + go 插件\n\n### go常用命令\n- go env 查看go环境\n- go run main.go 运行go文件\n\n### 工具链\n跨平台: GOOS=\"darwin\" go build\ngofmt, 类似于c语言的lint,统一风格\n\n### 测试： go test, 测试文件一般以XXX_test.go为文件名\n方法为：\n```go\nfunc TestAddNumber(t *testing.T)  {\n\tres := addNumberTo10()\n\tfmt.Println(\"hey\")\n\tif res != 45 {\n\t\tt.Errorf(\"wrong result of test\")\n\t}\n}\n```\n方法格式为： func TEST方法名(t *testing.T)\n\n### branchmark\nbranchmark一般以Branchmark开头\ncase 一般会跑n次，而且每次执行都会如此\n\n### 设置.zshrc文件，设置gopath的路径\n使用go get 来获取依赖：go get fyne.io/fyne\n\n###使用 gopm\n\n### 定义变量\nvar 变量名 变量类型\n数组定义： var team = [3]string{\"hello\", \"123\", \"235\"}\n\n### 切片\nfunc slices()  {\n\tvar array = [3]int{1,2,3}\n\tfmt.Println(array, array[1:2])\n}\n[1:2]是从1开始位置，长度是两个数相减\n\n### 函数的声明\n// 函数\nfunc add(a int, b int) int {\n\treturn  a+b\n}\n"
+    }
+  ]
+}

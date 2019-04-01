@@ -7,11 +7,7 @@
     },
     {
       "type": "text",
-      "data": "涉及到的类：&nbsp;UIViewController+NavigationBar，&nbsp;UIViewController+TopNaviBar，<span style=\"font-family: Menlo; font-size: 14px;\">UIViewController+LMNavigationBarItem，</span><span style=\"font-family: Menlo; font-size: 14px;\">UIViewController+CustomNavigationBar</span><div><br></div>"
-    },
-    {
-      "type": "text",
-      "data": "2. 切换改动比较小"
+      "data": "涉及到的类：&nbsp;UIViewController+NavigationBar，&nbsp;UIViewController+TopNaviBar，<span style=\"font-family: Menlo; font-size: 14px;\">UIViewController+LMNavigationBarItem，</span><span style=\"font-family: Menlo; font-size: 14px;\">UIViewController+CustomNavigationBar</span>"
     }
   ]
 }
