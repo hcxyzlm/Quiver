@@ -1,0 +1,9 @@
+{
+  "title": "总结",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "##工作总结\n进入两个半月了，谈谈入职以来的一些感受和总结\n### 工作总结\n1. 引入swiftlint强制约束规范\n2. 弱单例的引用，解决多个对象公用一个对象，然后内存得不到释放\n3. DoraemonKit的引入，内存泄漏和暴涨的收集\n4. AutoWeakDelegate, swift的回调不需要写weak self\n5. 基础的组件 \n6. 测肤仪和会员价项目，会员价项目\n7. 公共基础类BaseViewController，BaseViewModel\n8. LMPageController,更好用的SegmentUI"
+    }
+  ]
+}

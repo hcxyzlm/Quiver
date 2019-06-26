@@ -1,0 +1,9 @@
+{
+  "title": "会员价",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "线上bug: 权益列表点击选择权益弹窗\n### 涉及的接口：\n 使用权益：mei/rights/seller/search_rights_with_page\n \n 开单入口：\n 1. 使用权益开单\n 2. 使用预约开单\n 3. 直接开单\n "
+    }
+  ]
+}

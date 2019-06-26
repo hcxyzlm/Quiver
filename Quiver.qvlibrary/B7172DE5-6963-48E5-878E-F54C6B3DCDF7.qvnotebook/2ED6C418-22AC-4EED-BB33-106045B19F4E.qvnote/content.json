@@ -1,0 +1,9 @@
+{
+  "title": "injection即时实现",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "1. appstore安装injection\n2. ![IMAGE](quiver-image-url/C935A3113E944431C5D0E57DEA9389E3.jpg =332x187)打开你的工程路径\n3. appdelegate 的didFinishLaunchingWithOptions添加以下代码\nswift版\n```objc\nBundle(path: \"/Applications/InjectionIII.app/Contents/Resources/iOSInjection10.bundle\")!.load()\n```\noc版本\n```objc\n[[NSBundle bundleWithPath:@\"/Applications/InjectionIII.app/Contents/Resources/iOSInjection10.bundle\"] load];\n```\n4. 在需要更新的地方添加\n···objc\n@objc func injected() {\n        configureView(),需要更新的方法\n    }\n\n5. 如果想不想添加injected方法，也可以重新进入某界面刷新即可\n```"
+    }
+  ]
+}

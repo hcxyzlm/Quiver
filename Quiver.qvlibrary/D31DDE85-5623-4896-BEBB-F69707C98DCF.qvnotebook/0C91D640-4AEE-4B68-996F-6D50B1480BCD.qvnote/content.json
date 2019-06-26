@@ -1,0 +1,9 @@
+{
+  "title": "移动端的规范各个方面的思考",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "### memger request\nmemger request 要先简单check一遍代码，遇到有代码风格的地方建议修改再提，代码设计上不明白可以找提memger的人\n"
+    }
+  ]
+}

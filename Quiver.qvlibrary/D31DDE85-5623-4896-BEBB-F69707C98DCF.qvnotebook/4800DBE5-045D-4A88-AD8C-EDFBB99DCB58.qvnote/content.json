@@ -1,0 +1,9 @@
+{
+  "title": "测肤仪",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "## 基础概述\n### 需求文档\n- https://doc.qima-inc.com/pages/viewpage.action?pageId=189337817\n\n### 设计稿\n- https://lanhuapp.com//web/#/item/project/board?pid=baba4da3-2dd9-4b03-8c72-73b15be15f57&see=all\n\n### 效率平台\n- http://xiaolv.qima-inc.com/#/project/PROJ-3728\n\n### 移动端的代码设计文档\n- https://doc.qima-inc.com/pages/viewpage.action?pageId=200540566\n\n### 接口文档\n- http://dragon.qa.qima-inc.com/a/m/126/\n\n### 流程图\n![IMAGE](quiver-image-url/29DA7B7834D1DCEE073D38CE84FD52AD.jpg =1010x833)\n\n### 检测详情的设计\n![IMAGE](quiver-image-url/6D30B19EA75A06B17B463A6EA394D765.jpg =1019x801)\n\n### 详细实现\n1. 核心代码展示\n2. 核心业务说明\n\n## review目的\n1. 两端的业务和交互同步\n2. 提升代码规范\n3. 保证基本的业务流程规范和代码质量\n4. 发现bug,解决\n\n\n"
+    }
+  ]
+}

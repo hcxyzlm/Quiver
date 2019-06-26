@@ -1,0 +1,9 @@
+{
+  "title": "建议",
+  "cells": [
+    {
+      "type": "text",
+      "data": "1. lib api的模型层，建议放纯的模型，一些便利的变量和方法，放在对应的业务层用extension来隔离。<div><img src=\"quiver-image-url/400EE4E1FCB50B97F5423F7BAAAA4C37.jpg\" width=\"1746\" height=\"1224\"><br></div>"
+    }
+  ]
+}

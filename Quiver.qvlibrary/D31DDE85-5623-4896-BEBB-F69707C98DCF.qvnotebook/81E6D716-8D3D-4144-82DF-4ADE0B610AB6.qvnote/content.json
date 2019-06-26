@@ -1,0 +1,9 @@
+{
+  "title": "建议",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "优化: \n1. 把JSPatch有关的代码文件删除，可能会导致下架\n2. 引入Reveal, DoraemonKit, SwifterSwift第三方库\n3. swiftlint规范, xUnique文件重排工具\n4. 网络优化方案\n5. 本地缓存方案\n6. shortcut，用来更多机会展示给用户\n7. MieyeLib库，应该放网路请求和model类，不应该放一些基础的东西，比如工具\n8. 重构会员\n\n```objc\nblock [weak self] 使用guard 来替代\n\nlazy var removeItemAction = Action<Int, Void>.init { [weak self] index in\n guard self = self else {\n            return\n        }\n\n        if let strongSelf = self {\n            strongSelf.factory.order.orderItems.removeObject(at: index)\n            strongSelf.operatePriceCountingAction.execute((price: strongSelf.factory.getOrderOriginPrice(), discount: nil))\n        }\n        return .just(())\n    }\n    \n```\n![IMAGE](quiver-image-url/7AA4519FC22537167B519F40808507B9.jpg =860x101)\n单词写错了\n\n"
+    }
+  ]
+}

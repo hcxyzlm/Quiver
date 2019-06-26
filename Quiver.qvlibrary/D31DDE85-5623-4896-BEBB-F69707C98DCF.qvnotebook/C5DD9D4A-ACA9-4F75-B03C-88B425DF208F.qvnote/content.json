@@ -1,0 +1,9 @@
+{
+  "title": "公交车完整流程介绍",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "### 规则\n   每周二提测\n   周四之前发布\n更详细原则文档在doc上[移动端公交车-0发车须知](https://doc.qima-inc.com/pages/viewpage.action?pageId=32681477)\n\n### 流程\n1. 按照需求开发\n2. 更新公交车看板[jira](https://jira.qima-inc.com/issues/?filter=-1)\n3. 开发完成\n4. 自测\n5. 打包，打包平台[有赞打包平台](https://mbd.qima-inc.com/)\n6. 在群里at一下公交车负责人，包括测试点，影响范围\n7. 测试验证通过\n8. 打包，打正式的包，上传到testflight\n9. 下载testflight包，安装自测\n10. 在gitlab打需要涉及的git库，包括手机和平台端，打对应的tag\n11. 提交merger request，合并代码\n12. 编写发版记录[发版记录](https://doc.qima-inc.com/pages/viewpage.action?pageId=47033783)\n13. 到开发者中心写正式包的发布文案"
+    }
+  ]
+}

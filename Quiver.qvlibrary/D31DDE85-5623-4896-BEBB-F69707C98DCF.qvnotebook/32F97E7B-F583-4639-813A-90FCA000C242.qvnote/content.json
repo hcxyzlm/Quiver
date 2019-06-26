@@ -1,0 +1,9 @@
+{
+  "title": "ios View的代码结构",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "## View代码结构的规定\n有关苹果的设计规范[Coding Guidelines](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CodingGuidelines/CodingGuidelines.html)\n当我们定代码结构或规范下，一定前提下要符合这个标准。每个公司都会有自己一套的规范，以下是我的粗略见解\n\nViewController的代码应该差不多是这样：\n![IMAGE](quiver-image-url/84705B3E0A613587133473B972C94E78.jpg =1025x768)\n类扩展\n![IMAGE](quiver-image-url/F7C7345C0CE0E7020AF53FDB947AC4EA.jpg =1037x473)\n\n### 要点如下\n**所有的UI属性都使用lazy懒加载**\n**把需要实现的协议放在extension中**\n![IMAGE](quiver-image-url/80AA672EA0C262F5FBEA582C5537B227.jpg =1185x321)\n"
+    }
+  ]
+}

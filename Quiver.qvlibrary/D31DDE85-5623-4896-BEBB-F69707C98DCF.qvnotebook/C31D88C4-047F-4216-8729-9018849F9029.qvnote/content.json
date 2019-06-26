@@ -1,0 +1,9 @@
+{
+  "title": "打包流程",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "提测包\n1. 选择分支，构建集成选择![IMAGE](quiver-image-url/F83E94365A2EF2D8BFF26D762ECE723A.jpg =547x458)， 手机端则为zhuolimin_phone分支。\n2. 打开gitlab，在MeiyeIOS git库下，切换到集成区你指定的分支，修改![IMAGE](quiver-image-url/CA45C965B4C6F6277A97AE84C6714430.jpg =831x153)你需要打包的分支。然后测试构建，完成\n\n### 发布包\n1. 与提测包类似，不同的是锁定后要pad锁定的release，手机端为MeiyeMerchant_Release分支，然后去gitlab上面修改你要指定的分支"
+    }
+  ]
+}
