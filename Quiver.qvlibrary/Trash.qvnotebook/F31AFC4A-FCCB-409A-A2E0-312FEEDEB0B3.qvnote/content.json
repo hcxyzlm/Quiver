@@ -1,0 +1,9 @@
+{
+  "title": "代码规范",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "https://www.jianshu.com/p/288ea00dcfcf#correctness\n###\\ Enum 枚举\n每个枚举用小写字母开始\n\n```swift\nenum Shape {\n  case rectangle\n  case square\n  case rightTriangle\n  case equilateralTriangle\n}\n```\n\n## Selectors方法选择器\n### 推荐\n```objc\nlet sel = #selector(viewDidLoad)\n```\n### 不推荐\n```objc\nlet sel = #selector(ViewController.viewDidLoad)\n```\n\n## protocol 的实现\n"
+    }
+  ]
+}

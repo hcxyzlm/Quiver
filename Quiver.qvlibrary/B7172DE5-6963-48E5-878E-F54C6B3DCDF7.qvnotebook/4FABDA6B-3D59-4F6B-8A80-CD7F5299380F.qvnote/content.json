@@ -1,0 +1,17 @@
+{
+  "title": "Carsh防护方案",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "参考： [iOS APP运行时Crash自动修复系统](https://neyoufan.github.io/2017/01/13/ios/BayMax_HTSafetyGuard/?nsukey=4912Qc6KFq%2BA25gXVanZg1u%2B44nYi%2FsIDmrQPUvXBUWWU22s1ivEf3dhqqwTuPokKT%2BSTwC2u%2BftLLhl4KrlyxAUXCzdS4ryZO%2BkUcHaFqgooCN6Sge7vTlp50FrU1ScrmN%2B6WlnV%2F5jZjNS60a%2BV86%2BQ5No%2F0wVzAq4yYv0BN1SeaNAV%2B8qFfZoOXvKqBPI9h21GSu3dP1n2krAvim3mw%3D%3D)\n### 常见的 crash 错误有\n- unrecognized selector crash\n- KVO crash\n- NSNotification crash\n- NSTimer crash\n- Container crash（数组越界，插nil等）\n- NSString crash （字符串操作的crash）\n- Bad Access crash （野指针）\n- UI not on Main Thread Crash (非主线程刷UI (机制待改善))\n\n优点: 适合小团队，效果显著。\n缺点：降低运行效率，可以视为将 oc 全面转化成 swift 的一个过渡方案\n"
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    }
+  ]
+}

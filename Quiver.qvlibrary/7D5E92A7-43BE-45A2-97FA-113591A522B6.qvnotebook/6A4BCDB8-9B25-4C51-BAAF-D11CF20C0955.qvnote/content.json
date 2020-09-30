@@ -1,0 +1,9 @@
+{
+  "title": "ready for alibaba",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "## App网络层有哪些优化策略\n- 优化dns解析和缓存\n- 对传输数据进行压缩，减少传输数据\n- 使用缓存手段减少请求发起的次数\n- 使用策略来减少请求的发起次数，比如上一个请求未着地之前，不进行新的请求\n- 避免网络抖动，提供重发机智\n\n### weak的实现原理\nruntime维护了一个weak表，存储了指向该对象的所有weak指针。weak表实际是一个hash表，key是所指对象的地址，value是weak指针的数组地址(实际是指向该对象的地址)\nweak的实现原理：\n1.初始化时：runtime会调用objc_initweak的方法，初始化一个新的weak表，指向该对象地址\n2.添加引用时：objc_initweak函数回调用 objc_storeweak函数，objc_storeweak的作用是更新指针指向，创建对应的弱引用表\n3. 释放时，调用clearDeallocating函数，该函数首先根据对象的地址获取weak指针地址的数据，然后遍历这个数组把其中的数据至为nil, 最后把这个entry从weak表中删除，最后清空对象的记录"
+    }
+  ]
+}

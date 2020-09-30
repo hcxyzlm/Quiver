@@ -1,0 +1,9 @@
+{
+  "title": "泊学网编译原理",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "1. 安装 antlr\n\n2. 编写 hello.g4 文件\n\n```objc\n// 必须和文件名一致\ngrammar Hello;\n\n/// 自定义名称 hello,类型是 ID\nwelcome: 'hello' ID;\n\n/// ID的类型规则是 a~z,支持正则匹配\nID: [a-zA-Z]+;\n\n// 遇到空格的规则，跳过\nSPACE: [ \\t\\r\\n]+ -> skip;\n```\n\n3. antlr4 Hello.g4 -DLanguage=Java -o antlr4-runtime-java， 生成 java 的编译器\n4. 进入 antlr4-runtime-java目录，javac *.java生成可执行的 java 执行文件\n5. 执行grun Hello Welcome -tokens， 输入 hello zhuo, control+D 结束\n6. ![IMAGE](quiver-image-url/94EFD987FB92EDBC5519F60FFD3D7307.jpg =759x117)\n7. 生成图形化token结构:\n8. grun Hello  welcome -gui, 输入 hello zhuo"
+    }
+  ]
+}

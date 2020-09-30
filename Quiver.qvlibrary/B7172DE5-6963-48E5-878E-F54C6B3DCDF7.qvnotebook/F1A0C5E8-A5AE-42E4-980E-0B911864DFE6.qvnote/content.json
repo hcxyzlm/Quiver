@@ -1,0 +1,9 @@
+{
+  "title": "python学习",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "### 环境搭建\n1. 下载 python3.6.1, 打开.bashrc设置变量，\n2. ![IMAGE](quiver-image-url/F8F6E7F425690E83B0CD3BE2AA00DD7A.jpg =1778x352)\n3. 安装 pip用来管理第三方库\n4. 使用 pip 安装ipython，selenium.\n5. 安装chromedriver，用来启动谷歌浏览器，模拟登录\n6. 遇到问题： selenium.common.exceptions.WebDriverException:Message： Can not connect to the Service chromedriver\n7. 解决方案： 在/etc/hosts 文件添加   127.0.0.1       localhost."
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "title": "Swift面试题",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "### swift main函数\n我们新建swift工程，找不到main.swift。在appdelegate里面@UIApplicationMain就是为了取代我们在OC项目中的main.m，它实现了main函数（程序入口）以及调用了Cocoa Touch上的UIApplicationMain 函数，开启事件循环。\n我们也可以新建main.swift，把@UIApplicationMain去掉，不然会报错\n自己新建MyAppDelegate.swift，然后Apply @UIApplicationMain，同样也是可以的\n\n\n### rxswift 实现原理\n观察者（Observer）\n被观察者（Observable）\n原理类似于kvo。一个观察者和被观察者"
+    }
+  ]
+}
